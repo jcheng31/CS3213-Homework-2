@@ -6,5 +6,8 @@ Xuimovie.Models.Movie = Backbone.Model.extend({
 		updated_at: "",
 		img_url: "",
 		user: {}
+	},
+	initialize: function() {
+		
 	}
 });

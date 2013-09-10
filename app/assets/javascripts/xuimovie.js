@@ -6,7 +6,10 @@ window.Xuimovie = {
 };
 
 $(document).ready(function() {
+	var movieCollection = new Xuimovie.Collections.Movies();
 	mainView = new Xuimovie.Views.Movies({
-		el: $('#application-content')
+		el: document.getElementById("application-content"),
+		collection: movieCollection
 	});
+	movieCollection.fetch();
 });

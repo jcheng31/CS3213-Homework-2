@@ -9,13 +9,17 @@ Xuimovie.Views.GenericCollectionView = Backbone.View.extend({
 	},
 
 	render: function() {
+		var selfRendered = this.template({});
+		this.$el.html(selfRendered);
+
 		var fragment = document.createDocumentFragment();
 
 		_(this.childViews).each(function(curr) {
 			fragment.appendChild(curr.render().el);
 		});
 
-		this.$el.html(fragment);
+		this.$('#subview-container').html(fragment);
+
 		return this;
 	},
 

@@ -30,8 +30,12 @@ Xuimovie.Views.GenericCollectionView = Backbone.View.extend({
 	},
 
 	collectionChangeHandler: function(changedItem) {
-		this.removeModelFromChildViews(changedItem);
-		this.childViews.push(this.createViewForItem(changedItem));
+		this.childViews = [];
+		var that = this;
+		this.collection.each(function(model) {
+			that.childViews.push(that.createViewForItem(model));
+		});
+		this.render();
 	},
 
 	createViewForItem: function(item) {

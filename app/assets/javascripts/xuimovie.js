@@ -33,12 +33,18 @@ Xuimovie.Collections.Movies = Backbone.Collection.extend({
 	url: '//cs3213.herokuapp.com/movies.json',
 	model: Xuimovie.Models.Movie,
 	initialize: function() {
-		this.fetch();
+		this.fetch({dataType: 'jsonp'});
 	}
 });
 
 Xuimovie.Collections.Reviews = Backbone.Collection.extend({
-
+	url: function() {
+		return this.movie.url + '/reviews.json';
+	},
+	model: Xuimovie.Models.Review,
+	initialize: function() {
+		this.fetch({dataType: 'jsonp'});
+	}
 });
 
 $(document).ready(function() {

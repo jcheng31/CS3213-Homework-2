@@ -2,12 +2,11 @@ window.Xuimovie = {
 	Models: {},
 	Collections: {},
 	Views: {},
-	Routers: {},
-	initialize: function() {
-
-	}
+	Routers: {}
 };
 
 $(document).ready(function() {
-	Xuimovie.initialize();
+	mainView = new Xuimovie.Views.Movies({
+		el: $('#application-content')
+	});
 });

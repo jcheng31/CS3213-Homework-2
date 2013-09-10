@@ -20,7 +20,8 @@ Xuimovie.Views.GenericCollectionView = Backbone.View.extend({
 	},
 
 	collectionAddHandler: function(addedItem) {
-		this.createViewForItem(addedItem);
+		var newView = this.createViewForItem(addedItem);
+		this.childViews.push(newView);
 		this.render();
 	},
 

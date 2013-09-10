@@ -5,7 +5,7 @@ Xuimovie.Views.Movie = Backbone.View.extend({
 	},
 	render: function() {
 		var renderedHtml = this.template(this.model.attributes);
-		this.$el.replaceWith(renderedHtml);
+		this.$el.html(renderedHtml);
 		return this;
 	}
 });

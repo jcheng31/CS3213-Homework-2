@@ -21,28 +21,25 @@ window.Xuimovie = {
 			}
 		})
 	},
-	Collections: {
-		Movies: Backbone.Collection.extend({
-			url: '//cs3213.herokuapp.com/movies.json',
-			model: Xuimovie.Models.Movie,
-			initialize: function() {
-				this.fetch();
-			}
-		}),
-		Reviews: Backbone.Collection.extend({
-
-		})
-	},
-	Views: {
-
-	},
-	Routers: {
-
-	},
+	Collections: {},
+	Views: {},
+	Routers: {},
 	initialize: function() {
 
 	}
 };
+
+Xuimovie.Collections.Movies = Backbone.Collection.extend({
+	url: '//cs3213.herokuapp.com/movies.json',
+	model: Xuimovie.Models.Movie,
+	initialize: function() {
+		this.fetch();
+	}
+});
+
+Xuimovie.Collections.Reviews = Backbone.Collection.extend({
+
+});
 
 $(document).ready(function() {
 	Xuimovie.initialize();

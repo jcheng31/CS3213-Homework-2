@@ -22,13 +22,13 @@ window.Xuimovie = {
 		})
 	},
 	Collections: {
-		Movies: Backbone.Collections.extend({
+		Movies: Backbone.Collection.extend({
 			url: '//cs3213.herokuapp.com/movies.json',
 			initialize: function() {
 				this.fetch();
 			}
 		}),
-		Reviews: Backbone.Collections.extend({
+		Reviews: Backbone.Collection.extend({
 
 		})
 	},

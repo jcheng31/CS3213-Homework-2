@@ -6,10 +6,6 @@ window.Xuimovie = {
 };
 
 $(document).ready(function() {
-	var movieCollection = new Xuimovie.Collections.Movies();
-	mainView = new Xuimovie.Views.Movies({
-		el: document.getElementById("application-content"),
-		collection: movieCollection
-	});
-	movieCollection.fetch();
+	mainRouter = new Xuimovie.Routers.Main();
+	Backbone.history.start();
 });

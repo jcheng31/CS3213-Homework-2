@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Xuimovie</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+	<title>Xuimovie</title>
+	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= csrf_meta_tags %>
 </head>
 <body>
+	<div class="container">
+		<div class="page-header">
+			<h1>Xui Movies <small>Courtesy of movies@cs3213</small></h1>
+		</div>
 
-<%= yield %>
+		<%= yield %>
 
+	</div>
 </body>
 </html>

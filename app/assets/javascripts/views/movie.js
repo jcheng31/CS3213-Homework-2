@@ -15,6 +15,6 @@ Xuimovie.Views.Movie = Backbone.View.extend({
     "click button#viewMovie": "viewMovieDetail"
   },
   viewMovieDetail: function(){
-    alert(this.$el.html);
+    mainRouter.navigate("movies/" + this.model.attributes.id,{trigger: true});
   }
 });

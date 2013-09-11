@@ -1,9 +1,9 @@
 Xuimovie.Routers.Main = Backbone.Router.extend({
 	routes: {
-		"" : "initialize"
+		"" : "mainPage"
 	},
 
-	initialize: function() {
+	mainPage: function() {
 		var movieCollection = new Xuimovie.Collections.Movies();
 		mainView = new Xuimovie.Views.Movies({
 			el: document.getElementById("application-content"),

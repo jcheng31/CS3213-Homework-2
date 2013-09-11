@@ -8,12 +8,13 @@ Xuimovie.Views.Movie = Backbone.View.extend({
 	render: function() {
 		var renderedHtml = this.template(this.model.attributes);
 		this.$el.html(renderedHtml);
+    this.delegateEvents();
 		return this;
 	},
   events:{
     "click button#viewMovie": "viewMovieDetail"
   },
   viewMovieDetail: function(){
-    alert("viewMovie !!!!");
+    alert(this.$el.html);
   }
 });

@@ -22,5 +22,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    session[:access_token] = nil
+    redirect_to '/'
   end
 end

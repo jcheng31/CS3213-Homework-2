@@ -1,9 +1,14 @@
 Xuimovie::Application.routes.draw do
+  get "test/index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
+
+  get 'login' => "sessions#new", :as => "login"
+  get 'logout' => "sessions#destroy", :as => "logout"
+  get 'redirect' => "sessions#redirect", :as => "redirect"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

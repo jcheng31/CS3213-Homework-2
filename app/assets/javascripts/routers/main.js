@@ -24,11 +24,25 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
     movie.urlRoot = 'http://cs3213.herokuapp.com/movies';
     movie.fetch({
       success: function(){
-        movieView = new Xuimovie.Views.Movie({
+        movieDetailView = new Xuimovie.Views.MovieDetail({
           el: document.getElementById("application-content"),
           model:movie
         });
-        movieView.render();
+        //movieDetailView.render();
+      }
+    });
+
+    var url = "http://cs3213.herokuapp.com/movies/"+ id + "/reviews.json";
+    var reviewCollection = new Xuimovie.Collections.Reviews([],{
+      url: url
+    });
+    reviewsView = new Xuimovie.Views.Reviews({
+      el: document.getElementById("reviews-container"),
+      collection: reviewCollection
+    });
+    reviewCollection.fetch({
+      success: function() {
+        reviewsView.render();
       }
     });
   }

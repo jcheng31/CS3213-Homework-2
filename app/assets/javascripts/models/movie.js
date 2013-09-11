@@ -8,6 +8,6 @@ Xuimovie.Models.Movie = Backbone.Model.extend({
 		user: {}
 	},
 	initialize: function() {
-		
+
 	}
 });

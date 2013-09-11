@@ -1,6 +1,7 @@
 Xuimovie.Routers.Main = Backbone.Router.extend({
 	routes: {
-		"" : "mainPage"
+		"" : "mainPage",
+		"loggedout" : "redirectToMain"
 	},
 
 	mainPage: function() {
@@ -10,5 +11,9 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
 			collection: movieCollection
 		});
 		movieCollection.fetch();
+	},
+
+	redirectToMain: function() {
+		this.navigate("/", {trigger: true});
 	}
 });

@@ -28,7 +28,6 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
           el: document.getElementById("application-content"),
           model:movie
         });
-        //movieDetailView.render();
       }
     });
 
@@ -40,10 +39,6 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
       el: document.getElementById("reviews-container"),
       collection: reviewCollection
     });
-    reviewCollection.fetch({
-      success: function() {
-        reviewsView.render();
-      }
-    });
+    reviewCollection.fetch();
   }
 });

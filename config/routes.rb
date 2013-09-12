@@ -9,6 +9,8 @@ Xuimovie::Application.routes.draw do
   get 'logout' => "sessions#destroy", :as => "logout"
   get 'redirect' => "sessions#redirect", :as => "redirect"
 
+  # resources :movies
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

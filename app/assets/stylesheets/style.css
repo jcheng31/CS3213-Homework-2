@@ -7,3 +7,19 @@
 img.clickable {
 	cursor: pointer;
 }
+
+footer {
+	clear: both;
+  background-color: #000;
+  height: 40px;
+}
+
+footer p {
+  color: rgb(153, 153, 153);
+  text-align: center;
+  line-height: 40px;
+}
+
+#wrapper {
+	min-height: 500px;
+}

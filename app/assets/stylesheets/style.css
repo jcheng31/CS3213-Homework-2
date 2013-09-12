@@ -23,3 +23,8 @@ footer p {
 #wrapper {
 	min-height: 500px;
 }
+
+#new-movie-btn {
+  /*float: right;*/
+  margin-top: 15px;
+}

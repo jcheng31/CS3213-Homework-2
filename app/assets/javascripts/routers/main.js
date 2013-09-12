@@ -3,6 +3,7 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
     "" : "mainPage",
     "loggedout" : "redirectToMain",
     "movies/:id" : "getMovie",
+    "new_movie" : "createMovie"
   },
 
   mainPage: function() {
@@ -42,5 +43,12 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
         reviewCollection.fetch();
       }
     });    
+  },
+
+  createMovie: function() {
+    var createMovieView = new Xuimovie.Views.MovieCreate({
+      el: document.getElementById("application-content")
+    });
+    createMovieView.render();
   }
 });

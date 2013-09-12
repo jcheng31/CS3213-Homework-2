@@ -13,10 +13,15 @@ Xuimovie.Views.Reviews = Xuimovie.Views.GenericCollectionView.extend({
 			          		'comment': $('#review_comment').val()
 			        		}
 			       	 };
+		console.log(data);
 		e.preventDefault();
 		var collection = this.collection;
 		if (typeof(gon) != 'undefined') {
-			$.post(this.collection.url, data).done(function(data, success) { collection.fetch(); });
+			$.post(this.collection.url, data).done(function(data, success) { 
+				collection.fetch(); 
+				$('#review_score').html("");
+				$('#review_comment').html("");
+			});
 		} else {
 			alert("Please login first :)");
 		}

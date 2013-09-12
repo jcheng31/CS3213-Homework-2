@@ -2,5 +2,5 @@
 	<img class="clickable" id="viewMovie" src="<%= img_url %>">
 	<h4 class="truncate"><%= title %></h4>
 	<p><%= summary %></p>
-  <p>Updated at: <%= updated_at %></p>
+  <p><%= dateFormat(updated_at) %></p>
 </div>

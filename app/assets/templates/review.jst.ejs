@@ -1,6 +1,6 @@
 <div class="row-fluid">
   <p class="span12">
-    <strong><%= user.username %></strong> reviewed at <%= updated_at %>.
+    <strong><%= user.username %></strong> reviewed at <%= dateFormat(updated_at) %>.
     <span class="label label-success pull-right"><%= score %> points
     </span>
   </p>

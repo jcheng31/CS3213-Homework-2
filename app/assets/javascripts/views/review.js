@@ -15,8 +15,8 @@ Xuimovie.Views.Review = Backbone.View.extend({
   },
 
   deleteReview: function(){
-    this.model.url = "http://cs3213.herokuapp.com/movies/"+ this.model.get("movie_id") +".json/reviews/"+ this.model.id + ".json";
-    alert("2222"+this.model.url);
+    var url = "http://cs3213.herokuapp.com/movies/"+ this.model.get("movie_id") +"/reviews/"+ this.model.id + ".json";
+    this.model.url = url;
     this.model.destroy({
       headers: {
         auth_token: gon.token

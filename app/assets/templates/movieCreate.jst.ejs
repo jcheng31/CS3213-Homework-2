@@ -1,0 +1,31 @@
+<div class="page-header row-fluid">
+  <h2>Add a new movie</h2>
+</div>
+
+<form id="#new_movie_form" class="simple_form">
+  <div class="control-group">
+    <label class="control-label" for="movie_name">Name</label>
+    <div class="controls">
+      <input type="text" id="movie_name" required="true">
+    </div>
+  </div>
+
+   <div class="control-group">
+    <label class="control-label" for="movie_summary">Summary</label>
+    <div class="controls">
+      <input type="text" id="movie_summary" required="true">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="movie_img">Image</label>
+    <div class="controls">
+      <input type="file" id="movie_img" required="true">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <a class="btn btn-primary" id="submit">Create Movie</a>
+    <a href="/#" id="cancel" class="btn">Cancel</a>
+  </div>
+</form>

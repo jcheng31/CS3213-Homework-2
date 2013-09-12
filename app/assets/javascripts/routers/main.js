@@ -32,7 +32,8 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
         
         var url = "http://cs3213.herokuapp.com/movies/"+ id + "/reviews.json";
         var reviewCollection = new Xuimovie.Collections.Reviews([],{
-          url: url
+          url: url,
+          movie_id: id
         });
         reviewsView = new Xuimovie.Views.Reviews({
           el: document.getElementById("reviews-container"),

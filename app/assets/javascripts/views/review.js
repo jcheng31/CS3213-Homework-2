@@ -15,13 +15,23 @@ Xuimovie.Views.Review = Backbone.View.extend({
   },
 
   deleteReview: function(){
-    var url = "http://cs3213.herokuapp.com/movies/"+ this.model.get("movie_id") +"/reviews/"+ this.model.id + ".json";
-    this.model.url = url;
-    this.model.destroy({
-      headers: {
-        auth_token: gon.token
-      }
-    });
+    var url = "http://cs3213.herokuapp.com/movies/12/reviews/" + this.model.id +".json";
+    var model = this.model;
+    if(typeof gon != 'undefined'){
+      $.ajax(
+        {
+        type: "DELETE",
+        data: {"access_token": gon.token },
+        url: url,
+        error: function() {
+          alert("please only delete your own review.");
+        }
+      }).done(function(){
+        model.destroy();
+      });
+    } else{
+      alert("please login first!");
+    }
   }
 });
 

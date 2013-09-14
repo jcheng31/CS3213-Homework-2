@@ -12,16 +12,35 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
 
     if (!moviePage) {
       moviePage = 1;
+      $('#prev').removeClass("enabled");
+      $('#prev').addClass("disabled");
+    } else {
+      // We need to cast the parameter to a number, since it may be a string.
+      moviePage = parseInt(moviePage, 10);
     }
 
+    // Check if there's a page after this one.
+    var nextCollection = $.get(moviePageSourceUrl + (moviePage + 1), function(data) {
+      if (data.length) {
+        // There is.
+        $('#next').removeClass("disabled");
+        $('#next').addClass("enabled");
+      }
 
-    var movieCollection = new Xuimovie.Collections.Movies([],{
+      // Check if we need to enable the previous link.
+      if (moviePage > 1) {
+        $('#prev').removeClass("disabled");
+        $('#prev').addClass("enabled");
+      }
+    });
+
+    var movieCollection = new Xuimovie.Collections.Movies([], {
       url: moviePageSourceUrl + moviePage
     });
 
     mainView = new Xuimovie.Views.Movies({
       el: document.getElementById("application-content"),
-      collection: movieCollection,
+      collection: movieCollection
     });
     movieCollection.fetch();
   },

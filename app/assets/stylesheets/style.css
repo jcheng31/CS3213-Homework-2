@@ -30,7 +30,7 @@ footer p {
 }
 
 body {
-    background: url(image_path('/assets/grey_wash_wall.png'));
+    background: url('/assets/grey_wash_wall.png');
     color: #FFF;
     font-family: 'Open Sans';
     font-weight: 300;
@@ -72,4 +72,3 @@ img:hover {
 
 .enabled:hover {
   font-weight: bold;
-}

@@ -1,32 +1,20 @@
 .truncate {
-	white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 img.clickable {
-	cursor: pointer;
-}
-
-footer {
-	clear: both;
-  background-color: #000;
-  height: 40px;
-}
-
-footer p {
-  color: rgb(153, 153, 153);
-  text-align: center;
-  line-height: 40px;
+    cursor: pointer;
 }
 
 #wrapper {
-	min-height: 500px;
+    min-height: 500px;
 }
 
 #new-movie-btn {
-  /*float: right;*/
-  margin-top: 15px;
+    /*float: right;*/
+    margin-top: 15px;
 }
 
 body {
@@ -35,6 +23,9 @@ body {
     font-family: 'Open Sans';
     font-weight: 300;
     font-size: 1.3em;
+
+    /* for font smoothing */
+    -webkit-text-stroke: 1px rgba(0,0,0,0.1)
 }
 
 .thumbnail {
@@ -46,34 +37,85 @@ img {
     border: 5px solid #474747;
 }
 
-img:hover {
+img.clickable:hover {
     border-color: #1D1E21;
 }
 
+.navbar {
+}
+
+.brand {
+    font-family: 'Cinzel Decorative';
+    font-size: 24px !important;
+    text-align: center;
+}
+
 .navbar-inner {
-    background-color: #FFF; /* background color will be black for all browsers */
-    background-image: none;
+    background-color: #CCC; /* background color will be black for all browsers */
+    background: url('/assets/fabric.png') !important;
+
     background-repeat: no-repeat;
     filter: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5) !important;
 }
 
 .disabled {
-  font-style: italic;
-  color: gray;
+    font-style: italic;
+    color: gray;
 }
 
 .navigation {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .navigation:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .enabled:hover {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 .well {
-  color: #000;
+    color: #000;
+}
+
+
+/*sticky footer */
+html,body{
+    height: 100%
+}
+
+#wrapper{
+    width: 100%;
+    min-height: 100%;
+    position:relative;
+}
+
+#application-content{
+    margin-top: 60px;
+    padding-bottom: 40px;    /* height of footer */
+}
+
+footer{
+    color: #FFF;
+    font-size: 16px;
+    text-align: right;
+    height: 40px;
+    width:100%;
+    position: absolute;
+    bottom: 0;
+    line-height: 40px;
+}
+
+footer p {
+    padding-right: 10%;
+}
+
+.btn {
+    border-radius: 0px !important;
+}
+
+#movie-hot {
+    margin-bottom: 20px;
 }

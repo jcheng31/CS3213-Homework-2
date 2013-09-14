@@ -11,27 +11,19 @@ Xuimovie.Views.GenericCollectionView = Backbone.View.extend({
 	render: function() {
 		var selfRendered = this.template({});
 		this.$el.html(selfRendered);
-
-		var fragment = document.createDocumentFragment();
-
-		_(this.childViews).each(function(curr) {
-			fragment.appendChild(curr.render().el);
-		});
-
-		this.$('#subview-container').html(fragment);
-
+		this.renderSubviews();
 		return this;
 	},
 
 	collectionAddHandler: function(addedItem) {
 		var newView = this.createViewForItem(addedItem);
 		this.childViews.push(newView);
-		this.render();
+		this.renderSubviews();
 	},
 
 	collectionRemoveHandler: function(removedItem) {
 		this.removeModelFromChildViews(removedItem);
-		this.render();
+		this.renderSubviews();
 	},
 
 	collectionChangeHandler: function(changedItem) {
@@ -40,7 +32,7 @@ Xuimovie.Views.GenericCollectionView = Backbone.View.extend({
 		this.collection.each(function(model) {
 			that.childViews.push(that.createViewForItem(model));
 		});
-		this.render();
+		this.renderSubviews();
 	},
 
 	createViewForItem: function(item) {
@@ -54,5 +46,15 @@ Xuimovie.Views.GenericCollectionView = Backbone.View.extend({
 		this.childViews = this.childViews.filter(function(view) {
 			return view.model != model;
 		});
+	},
+
+	renderSubviews: function() {
+		var fragment = document.createDocumentFragment();
+
+		_(this.childViews).each(function(curr) {
+			fragment.appendChild(curr.render().el);
+		});
+
+		this.$('#subview-container').html(fragment);
 	}
 });

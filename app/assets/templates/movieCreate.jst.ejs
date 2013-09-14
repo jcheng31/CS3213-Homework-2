@@ -2,30 +2,30 @@
   <h2>Add a new movie</h2>
 </div>
 
-<form id="#new_movie_form" class="simple_form">
+<form id="#new-movie-form" class="simple-form" method="POST">
   <div class="control-group">
-    <label class="control-label" for="movie_name">Name</label>
+    <label class="control-label" for="movie-name">Name</label>
     <div class="controls">
-      <input type="text" id="movie_name" required="true" name="movie[title]">
+      <input type="text" id="movie-name" required="true" name="movie[title]">
     </div>
   </div>
 
    <div class="control-group">
-    <label class="control-label" for="movie_summary">Summary</label>
+    <label class="control-label" for="movie-summary">Summary</label>
     <div class="controls">
-      <input type="text" id="movie_summary" required="true" name="movie[summary]">
+      <input type="text" id="movie-summary" required="true" name="movie[summary]">
     </div>
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="movie_img">Image</label>
+    <label class="control-label" for="movie-img">Image</label>
     <div class="controls">
-      <input type="file" id="movie_img" required="true" name="movie[img]">
+      <input type="file" id="movie-img" required="true" name="movie[img]">
     </div>
   </div>
 
   <div class="control-group">
     <a class="btn btn-primary" id="submit">Create Movie</a>
-    <a href="/#" id="cancel" class="btn">Cancel</a>
+    <a href="/#" id="btn-cancel" class="btn">Cancel</a>
   </div>
 </form>

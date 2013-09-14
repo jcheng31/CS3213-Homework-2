@@ -8,14 +8,15 @@ Xuimovie.Views.MovieCreate = Backbone.View.extend({
 		return this;
 	},
   events:{
-    "click #submit": "createMovie"
+    "click #submit": "createMovie",
+    "click #btn-cancel": "cancelCreate"
   },
   createMovie: function(e) {
   	var data = { 	'access_token': gon.token,
 			       	 		'movie': {
-			       	 			'title': $('#movie_name').val(),
-			          		'summary': $('#movie_summary').val(),
-			          		'img': $('#movie_img').val()
+			       	 			'title': $('#movie-name').val(),
+			          		'summary': $('#movie-summary').val(),
+			          		'img': $('#movie-img').val()
 			        		}
 			       	 };
 		console.log(data);
@@ -28,5 +29,9 @@ Xuimovie.Views.MovieCreate = Backbone.View.extend({
 		} else {
 			alert("Please login first :)");
 		}
+  },
+	
+	cancelCreate: function(e) {
+    mainRouter.navigate("/", { trigger: true });
   }
 });

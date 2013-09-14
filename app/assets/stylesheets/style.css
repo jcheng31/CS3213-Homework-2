@@ -28,3 +28,20 @@ footer p {
   /*float: right;*/
   margin-top: 15px;
 }
+
+.disabled {
+  font-style: italic;
+  color: gray;
+}
+
+.navigation {
+  text-decoration: underline;
+}
+
+.navigation:hover {
+  cursor: pointer;
+}
+
+.enabled:hover {
+  font-weight: bold;
+}

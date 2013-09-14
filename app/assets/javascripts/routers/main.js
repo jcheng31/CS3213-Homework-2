@@ -31,7 +31,7 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
         });
         // movieDetailView.render();
         
-        var url = "http://cs3213.herokuapp.com/movies/"+ id + "/reviews.json";
+        var url = "//cs3213.herokuapp.com/movies/"+ id + "/reviews.json";
         var reviewCollection = new Xuimovie.Collections.Reviews([],{
           url: url,
           movie_id: id
@@ -42,7 +42,7 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
         });
         reviewCollection.fetch();
       }
-    });    
+    });
   },
 
   createMovie: function() {

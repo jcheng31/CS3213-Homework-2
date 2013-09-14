@@ -16,13 +16,6 @@ Xuimovie.Views.MovieCreate = Backbone.View.extend({
     },
 
     createMovie: function(e) {
-
-        console.log("btn-create clicked");
-
-        console.log(e.target);
-        console.log($(e.target).closest('form'));
-
-
         $(e.target).closest('form').ajaxSubmit( {
 
             url: 'http://cs3213.herokuapp.com/movies.json',

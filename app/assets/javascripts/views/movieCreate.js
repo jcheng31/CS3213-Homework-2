@@ -20,8 +20,9 @@ Xuimovie.Views.MovieCreate = Backbone.View.extend({
             alert('Please login first');
             return false;
         }
-        $(e.target).closest('form').ajaxSubmit( {
 
+        // submit the form fields via POST method
+        $(e.target).closest('form').ajaxSubmit( {
             url: 'http://cs3213.herokuapp.com/movies.json',
             dataType: 'json',
             data: {

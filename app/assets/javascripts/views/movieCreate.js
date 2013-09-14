@@ -16,16 +16,15 @@ Xuimovie.Views.MovieCreate = Backbone.View.extend({
     },
 
     createMovie: function(e) {
-    		if (typeof(gon) == 'undefined') {
-          alert('Please login first');
-          return false;
-         }
+        if (typeof(gon) == 'undefined') {
+            alert('Please login first');
+            return false;
+        }
         $(e.target).closest('form').ajaxSubmit( {
 
             url: 'http://cs3213.herokuapp.com/movies.json',
             dataType: 'json',
             data: {
-                // TODO: replace with real token
                 access_token : gon.token
             },
             method: 'POST',
@@ -34,9 +33,11 @@ Xuimovie.Views.MovieCreate = Backbone.View.extend({
                 console.log("ajax call to create movie failed");
             },
             success: function(e) {
+                // TODO: add Backbone Route
                 console.log("success");
             },
             beforeSubmit: function(e) {
+                // TODO: add validation for the required field (if not done automatically)
             }
         });
 

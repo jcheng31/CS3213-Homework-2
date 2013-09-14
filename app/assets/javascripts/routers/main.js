@@ -1,7 +1,7 @@
 Xuimovie.Routers.Main = Backbone.Router.extend({
   routes: {
     "": "mainPage",
-    "loggedout": "redirectToMain",
+    "#loggedout": "redirectToMain",
     "movies/:id": "getMovie",
     "new_movie": "createMovie",
     ":moviePage": "mainPage"

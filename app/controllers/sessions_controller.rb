@@ -23,6 +23,6 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:access_token] = nil
-    redirect_to '/#loggedout'
+    redirect_to '/'
   end
 end

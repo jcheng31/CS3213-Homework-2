@@ -8,13 +8,15 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
   },
 
   mainPage: function(moviePage) {
+    var moviePageSourceUrl = '//cs3213.herokuapp.com/movies.json?page=';
+
     if (!moviePage) {
       moviePage = 1;
     }
 
 
-    var movieCollection = new Xuimovie.Collections.Movies({
-      url: '//cs3213.herokuapp.com/movies.json?page=' + moviePage
+    var movieCollection = new Xuimovie.Collections.Movies([],{
+      url: moviePageSourceUrl + moviePage
     });
 
     mainView = new Xuimovie.Views.Movies({

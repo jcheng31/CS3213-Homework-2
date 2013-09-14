@@ -22,7 +22,7 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
   getMovie: function(id){
     var movie = new Xuimovie.Models.Movie();
     movie.id = id + ".json";
-    movie.urlRoot = 'http://cs3213.herokuapp.com/movies';
+    movie.urlRoot = '//cs3213.herokuapp.com/movies';
     movie.fetch({
       success: function(){
         movieDetailView = new Xuimovie.Views.MovieDetail({

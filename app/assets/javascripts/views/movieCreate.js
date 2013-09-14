@@ -30,6 +30,7 @@ Xuimovie.Views.MovieCreate = Backbone.View.extend({
                 console.log("ajax call to create movie failed");
             },
             success: function(e) {
+                // TODO: do routing in backbone
                 console.log("success");
             },
             beforeSubmit: function(e) {

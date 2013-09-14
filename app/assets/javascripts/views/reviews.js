@@ -18,12 +18,13 @@ Xuimovie.Views.Reviews = Xuimovie.Views.GenericCollectionView.extend({
 		var collection = this.collection;
 		if (typeof(gon) != 'undefined') {
 			$.post(this.collection.url, data).done(function(data, success) { 
-				collection.fetch(); 
-				$('#review_score').html("");
-				$('#review_comment').html("");
+				collection.fetch();
 			});
 		} else {
 			alert("Please login first :)");
+			return false;
 		}
+		$('#review_score').val("");
+		$('#review_comment').val("");
 	}
 });

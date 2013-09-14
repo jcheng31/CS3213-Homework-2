@@ -16,7 +16,7 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
     mainView = new Xuimovie.Views.Movies({
       el: document.getElementById("application-content"),
       collection: movieCollection,
-      page: moviePage
+      url: '//cs3213.herokuapp.com/movies.json?page=' + moviePage
     });
     movieCollection.fetch();
   },

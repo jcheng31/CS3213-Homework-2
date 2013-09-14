@@ -29,8 +29,6 @@ footer p {
   margin-top: 15px;
 }
 
-<<<<<<< HEAD
-
 body {
     background: url('/assets/grey_wash_wall.png');
     color: #FFF;
@@ -57,7 +55,7 @@ img:hover {
     background-image: none;
     background-repeat: no-repeat;
     filter: none;
-=======
+
 .disabled {
   font-style: italic;
   color: gray;

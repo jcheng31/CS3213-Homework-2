@@ -3,14 +3,20 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
     "" : "mainPage",
     "loggedout" : "redirectToMain",
     "movies/:id" : "getMovie",
-    "new_movie" : "createMovie"
+    "new_movie" : "createMovie",
+    ":moviePage" : "mainPage"
   },
 
-  mainPage: function() {
+  mainPage: function(moviePage) {
     var movieCollection = new Xuimovie.Collections.Movies();
+
+    if (!moviePage) {
+      moviePage = 1;
+    }
     mainView = new Xuimovie.Views.Movies({
       el: document.getElementById("application-content"),
-      collection: movieCollection
+      collection: movieCollection,
+      page: moviePage
     });
     movieCollection.fetch();
   },

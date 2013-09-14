@@ -3,7 +3,8 @@ Xuimovie.Views.Movies = Xuimovie.Views.GenericCollectionView.extend({
 	subView: Xuimovie.Views.Movie,
 	events: {
 		"click span#next.enabled": "nextPage",
-		"click span#prev.enabled": "prevPage"
+		"click span#prev.enabled": "prevPage",
+		"click a#new-movie-btn": "toNewMoviePage"
 	},
 
 	nextPage: function() {
@@ -45,5 +46,10 @@ Xuimovie.Views.Movies = Xuimovie.Views.GenericCollectionView.extend({
 		mainRouter.navigate("/" + page, {
 			trigger: true
 		});
+	},
+
+	toNewMoviePage: function(e) {
+		e.preventDefault();
+		this._navigateToPage('new_movie');
 	}
 });

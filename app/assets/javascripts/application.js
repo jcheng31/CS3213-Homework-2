@@ -17,6 +17,7 @@
 //= require underscore
 //= require backbone
 //= require xuimovie
+//= require jquery.form
 //= require_tree ../templates
 //= require_tree ./models
 //= require_tree ./collections

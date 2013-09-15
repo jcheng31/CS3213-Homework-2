@@ -8,7 +8,7 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
         ":moviePage"        : "mainPage"
     },
     editMovie: function(movieId) {
-        
+      console.log('router called')
     },
     mainPage: function(moviePage) {
         var moviePageSourceUrl = '//cs3213.herokuapp.com/movies.json?page=';

@@ -8,7 +8,7 @@
   </div>
   <div class="row-fluid">
     <p class="span12"><%= comment %></p>
-    <% if (user.id == gon.id) { %>
+    <% if (typeof(gon) != 'undefined' && user.id == gon.id) { %>
       <button class="btn btn-danger pull-right" id="deleteReview">Delete Review</button>
     <% } %>
   </div>

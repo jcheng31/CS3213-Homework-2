@@ -13,7 +13,7 @@
     <p>Updated at: <%= dateFormat(updated_at) %></p>
 
     <!-- TODO: show these button only if the user is the creater (possible?) -->
-    <% if (user.id == gon.id) { %>
+    <% if (typeof(gon) != 'undefined' && user.id == gon.id) { %>
     <a href="" class="btn btn-info" id="btn-movie-edit" style="border-radius: 0; font-weight:400; color: #000; width: 100px">Update</a>
     <a href="" class="btn btn-danger" id="btn-movie-delete" style="border-radius: 0; font-weight: 400; color: #000; width: 100px">Delete</a>
     <% } %>

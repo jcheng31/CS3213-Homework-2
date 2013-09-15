@@ -87,6 +87,7 @@ Xuimovie.Views.MovieEdit = Backbone.View.extend({
     },
 
     cancelCreate: function(e) {
+        e.preventDefault();
         mainRouter.navigate('/', { trigger: true });
     }
 });

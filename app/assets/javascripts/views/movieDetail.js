@@ -35,6 +35,7 @@ Xuimovie.Views.MovieDetail = Backbone.View.extend({
                 access_token: gon.token
             },
             processData: true,
+            // delete from the DOM only when the server has confirmed
             wait: true,
             success: function() {
                 mainRouter.navigate('/', {trigger: true});

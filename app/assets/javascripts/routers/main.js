@@ -8,7 +8,20 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
         ":moviePage"        : "mainPage"
     },
     editMovie: function(movieId) {
-      console.log('router called')
+        // TODO: if have time, cleaner to use event based method i.e. router just
+        // TODO: publish event and let model handle the update
+
+        var movie = new Xuimovie.Models.Movie({id: movieId});
+        movie.fetch({
+            success: function() {
+                var movieEditView = new Xuimovie.Views.MovieEdit({model: movie});
+
+                movieEditView.render();
+
+                window.global = movieEditView;
+            }
+        });
+
     },
     mainPage: function(moviePage) {
         var moviePageSourceUrl = '//cs3213.herokuapp.com/movies.json?page=';

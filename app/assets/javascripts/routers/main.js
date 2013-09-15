@@ -14,7 +14,10 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
         var movie = new Xuimovie.Models.Movie({id: movieId});
         movie.fetch({
             success: function() {
-                var movieEditView = new Xuimovie.Views.MovieEdit({model: movie});
+                var movieEditView = new Xuimovie.Views.MovieEdit({
+                    model: movie,
+                    el: $('#application-content')
+                });
 
                 movieEditView.render();
 

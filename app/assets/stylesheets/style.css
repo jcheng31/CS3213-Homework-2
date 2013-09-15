@@ -33,11 +33,11 @@ body {
     text-align: center;
 }
 
-img {
+.thumbnail img {
     border: 5px solid #474747;
 }
 
-img.clickable:hover {
+.thumbnail img.clickable:hover {
     border-color: #1D1E21;
 }
 

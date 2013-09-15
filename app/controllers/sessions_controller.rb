@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  require 'net/http'
+  require 'json'
+
   def redirect_url
     return 'http://localhost:3000/redirect' if Rails.env == "development" 
     'http://xui-movies.herokuapp.com/redirect'
@@ -16,13 +19,20 @@ class SessionsController < ApplicationController
 
   def redirect
     access_token = client.auth_code.get_token(params[:code], :redirect_uri => redirect_url)
+    user_url = "http://cs3213.herokuapp.com/users/current.json?access_token=#{access_token.token}"
+    user_info = JSON.parse(Net::HTTP.get(URI.parse(user_url)))
+
     session[:access_token] = access_token.token
+    session[:user_id] = user_info["id"]
+    session[:user_email] = user_info["email"]
     puts "Access Token: " + session[:access_token]
     redirect_to '/'
   end
 
   def destroy
     session[:access_token] = nil
+    session[:user_id] = nil
+    session[:user_email] = nil
     redirect_to '/'
   end
 end

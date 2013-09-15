@@ -1,17 +1,22 @@
-Xuimovie.Views.MovieCreate = Backbone.View.extend({
-    template: JST["movieCreate"],
+Xuimovie.Views.MovieEdit = Backbone.View.extend({
+    el: window.document.getElementById('application-content'),
+
+    template: JST["movieEdit"],
 
     initialize: function() {
     },
 
     render: function() {
-        this.$el.html(this.template());
+        console.log(this.model.toJSON());
+
+
+        $(document.body).find('#application-content').html(this.template(this.model.toJSON()));
         this.delegateEvents();
         return this;
     },
 
     events:{
-        "click #submit": "createMovie",
+        "click #btn-edit": "createMovie",
         "click #btn-cancel": "cancelCreate"
     },
 

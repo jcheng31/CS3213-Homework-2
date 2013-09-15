@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   def pass_token
     gon.token = access_token if logged_in?
+    gon.user_email = user_email if logged_in?
+    gon.id = user_id if logged_in?
   end
 
   def logged_in?
@@ -15,5 +17,13 @@ class ApplicationController < ActionController::Base
 
   def access_token
   	session[:access_token]
+  end
+
+  def user_id
+    session[:user_id]
+  end
+
+  def user_email
+    session[:user_email]
   end
 end

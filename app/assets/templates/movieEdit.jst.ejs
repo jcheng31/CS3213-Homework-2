@@ -1,0 +1,31 @@
+<div class="page-header row-fluid">
+  <h2>Edit Movie</h2>
+</div>
+
+<form id="#new-movie-form" class="simple-form" method="POST">
+  <div class="control-group">
+    <label class="control-label" for="movie-name">Name</label>
+    <div class="controls">
+      <input type="text" id="movie-name" required="true" name="movie[title]" value=<%= title %>  >
+    </div>
+  </div>
+
+   <div class="control-group">
+    <label class="control-label" for="movie-summary">Summary</label>
+    <div class="controls">
+      <input type="text" id="movie-summary" required="true" name="movie[summary]" value=<%= summary %>>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="movie-img">Image</label>
+    <div class="controls">
+      <input type="file" id="movie-img" required="true" name="movie[img]">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <a class="btn btn-primary" id="btn-edit">Update</a>
+    <a href="/#" id="btn-cancel" class="btn">Cancel</a>
+  </div>
+</form>

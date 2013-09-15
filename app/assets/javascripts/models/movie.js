@@ -9,5 +9,8 @@ Xuimovie.Models.Movie = Backbone.Model.extend({
 	},
 	initialize: function() {
 
-	}
+	},
+    url: function() {
+        return 'http://cs3213.herokuapp.com/movies/{0}.json'.format(this.id);
+    }
 });

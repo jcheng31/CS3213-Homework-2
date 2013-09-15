@@ -36,10 +36,6 @@ Xuimovie.Views.MovieEdit = Backbone.View.extend({
             access_token: gon.token
         });
 
-
-        window.global = movie;
-
-
 //        var updatedMovie = new Xuimovie.Models.Movie({
 //            id: movie.get('id'),
 //            title: movie.get('title'),

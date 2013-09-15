@@ -5,6 +5,7 @@ Xuimovie.Views.MovieDetail = Backbone.View.extend({
     },
     events: {
         'click #back-list-btn': 'back',
+        'click #btn-movie-edit': 'editMovie',
         'click #btn-movie-delete': 'destroyMovie'
     },
     render: function() {
@@ -16,6 +17,14 @@ Xuimovie.Views.MovieDetail = Backbone.View.extend({
     back: function(e) {
         e.preventDefault();
         mainRouter.navigate('/', { trigger: true });
+    },
+    editMovie: function(e) {
+        e.preventDefault();
+        window.global = this;
+
+        var movieId = this.model.get('id');
+        var navigateUrl = '/movies/{0}/#edit'.format(movieId);
+        mainRouter.navigate(navigateUrl , { trigger: true });
     },
     destroyMovie: function(e) {
         e.preventDefault();

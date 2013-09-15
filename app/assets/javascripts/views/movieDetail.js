@@ -39,6 +39,9 @@ Xuimovie.Views.MovieDetail = Backbone.View.extend({
             wait: true,
             success: function() {
                 mainRouter.navigate('/', {trigger: true});
+            },
+            error: function(model, xhr, options) {
+                alert("Sorry we cannot delete this movie: " + xhr);
             }
         });
     }

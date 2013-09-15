@@ -119,3 +119,19 @@ footer p {
 #movie-hot {
     margin-bottom: 20px;
 }
+
+#movieDetails {
+    margin-top: 20px;
+}
+
+#subview-container .well {
+    border: none;
+    border-top: 1px solid #000;
+    border-bottom:  1px solid #616161;
+    margin: 0 auto;
+    font-size: 16px;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 0;
+    width: 40%;
+    color: #fff;
+}

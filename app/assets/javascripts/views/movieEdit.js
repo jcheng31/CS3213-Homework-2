@@ -67,7 +67,7 @@ Xuimovie.Views.MovieEdit = Backbone.View.extend({
   cancelEdit: function(e) {
     e.preventDefault();
     var movieId = this.model.get('id');
-    var url = 'http://cs3213.herokuapp.com/movies/{0}.json'.format(movieId);
-    mainRouter.navigate(url, { trigger: true });
+    var navigateUrl = '/movies/{0}'.format(movieId);
+    mainRouter.navigate(navigateUrl, { trigger: true });
   }
 });

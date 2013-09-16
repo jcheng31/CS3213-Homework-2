@@ -15,7 +15,7 @@ Xuimovie.Views.MovieEdit = Backbone.View.extend({
 
   events: {
     "click #btn-edit": "editMovie",
-    "click #btn-cancel": "cancelCreate"
+    "click #btn-cancel": "cancelEdit"
   },
 
   editMovie: function(e) {
@@ -64,8 +64,10 @@ Xuimovie.Views.MovieEdit = Backbone.View.extend({
 
   },
 
-  cancelCreate: function(e) {
+  cancelEdit: function(e) {
     e.preventDefault();
-    mainRouter.navigate('/', { trigger: true });
+    var movieId = this.model.get('id');
+    var url = 'http://cs3213.herokuapp.com/movies/{0}.json'.format(movieId);
+    mainRouter.navigate(url, { trigger: true });
   }
 });

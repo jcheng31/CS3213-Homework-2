@@ -20,8 +20,6 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
                 });
 
                 movieEditView.render();
-
-                window.global = movieEditView;
             }
         });
 

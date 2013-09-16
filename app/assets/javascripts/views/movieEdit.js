@@ -50,7 +50,7 @@ Xuimovie.Views.MovieEdit = Backbone.View.extend({
         console.log("success");
       },
       beforeSubmit: function(e) {
-        if ($('#movie-img').val == "") {
+        if ($('#movie-img').val() == "") {
           $('#movie-img').remove();
         }
       }

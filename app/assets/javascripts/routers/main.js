@@ -14,7 +14,11 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
         var movie = new Xuimovie.Models.Movie({id: movieId});
         movie.fetch({
             success: function() {
-                movieEditView.set("model", movie);
+                var movieEditView = new Xuimovie.Views.MovieEdit({
+                    model: movie,
+                    el: $('#application-content')
+                });
+
                 movieEditView.render();
             }
         });
@@ -51,7 +55,10 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
             url: moviePageSourceUrl + moviePage
         });
 
-        mainView.set("collection", movieCollection);
+        mainView = new Xuimovie.Views.Movies({
+            el: document.getElementById("application-content"),
+            collection: movieCollection
+        });
         movieCollection.fetch();
     },
 
@@ -66,7 +73,10 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
         movie.id = id;
         movie.fetch({
             success: function() {
-                movieDetailView.set('model', movie);
+                movieDetailView = new Xuimovie.Views.MovieDetail({
+                    el: document.getElementById("application-content"),
+                    model: movie
+                });
                 // movieDetailView.render();
 
                 var url = "//cs3213.herokuapp.com/movies/" + id + "/reviews.json";
@@ -84,6 +94,9 @@ Xuimovie.Routers.Main = Backbone.Router.extend({
     },
 
     createMovie: function() {
+        var createMovieView = new Xuimovie.Views.MovieCreate({
+            el: document.getElementById("application-content")
+        });
         createMovieView.render();
     }
 });

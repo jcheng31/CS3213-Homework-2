@@ -7,18 +7,6 @@ window.Xuimovie = {
 
 $(document).ready(function() {
 	mainRouter = new Xuimovie.Routers.Main();
-	movieEditView = new Xuimovie.Views.MovieEdit({
-    el: $('#application-content')
-  });
-  mainView = new Xuimovie.Views.Movies({
-    el: $("#application-content")
-  });
-  movieDetailView = new Xuimovie.Views.MovieDetail({
-    el: $("#application-content"),
-  });
-  createMovieView = new Xuimovie.Views.MovieCreate({
-   	el: $("#application-content")
-   });
 	Backbone.history.start();
 });
 

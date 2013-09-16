@@ -50,6 +50,9 @@ Xuimovie.Views.MovieEdit = Backbone.View.extend({
         console.log("success");
       },
       beforeSubmit: function(e) {
+        if ($('#movie-img').val == "") {
+          $('#movie-img').remove();
+        }
       }
     });
     var xhr = form.data('jqxhr');

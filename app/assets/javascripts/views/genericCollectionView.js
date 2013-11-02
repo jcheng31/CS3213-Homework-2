@@ -1,4 +1,4 @@
-Xuimovie.Views.GenericCollectionView = Backbone.View.extend({
+Xuimovie.Views.GenericCollectionView = Xui.View.extend({
 	initialize: function() {
 		this.listenTo(this.collection, 'add', this.collectionAddHandler);
 		this.listenTo(this.collection, 'change', this.collectionChangeHandler);

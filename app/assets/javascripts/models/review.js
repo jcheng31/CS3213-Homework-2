@@ -1,4 +1,4 @@
-Xuimovie.Models.Review = Backbone.Model.extend({
+Xuimovie.Models.Review = Xui.Model.extend({
 	defaults: {
 		comment: "",
 		id: 0,

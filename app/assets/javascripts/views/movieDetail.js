@@ -1,4 +1,4 @@
-Xuimovie.Views.MovieDetail = Backbone.View.extend({
+Xuimovie.Views.MovieDetail = Xui.View.extend({
     template: JST["movieDetail"],
     initialize: function() {
         this.render();

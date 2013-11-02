@@ -1,4 +1,4 @@
-Xuimovie.Models.Movie = Backbone.Model.extend({
+Xuimovie.Models.Movie = Xui.Model.extend({
 	defaults: {
 		id: 0,
 		summary: "",

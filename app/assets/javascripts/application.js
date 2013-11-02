@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require underscore
 //= require backbone
+//= require xui
 //= require xuimovie
 //= require jquery.form
 //= require_tree ../templates

@@ -1,4 +1,4 @@
-Xuimovie.Routers.Main = Backbone.Router.extend({
+Xuimovie.Routers.Main = Xui.Router.extend({
     routes: {
         ""                  : "mainPage",
         "#loggedout"        : "redirectToMain",

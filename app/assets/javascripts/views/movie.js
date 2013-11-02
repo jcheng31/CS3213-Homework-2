@@ -1,4 +1,4 @@
-Xuimovie.Views.Movie = Backbone.View.extend({
+Xuimovie.Views.Movie = Xui.View.extend({
 	template: JST["movie"],
 	tagName: "li",
 	className: "span4",

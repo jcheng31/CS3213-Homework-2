@@ -1,4 +1,4 @@
-Xuimovie.Views.Review = Backbone.View.extend({
+Xuimovie.Views.Review = Xui.View.extend({
     template: JST["review"],
     url:'//cs3213.herokuapp.com/movies/',
     initialize: function() {

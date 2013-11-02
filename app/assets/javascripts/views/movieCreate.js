@@ -1,4 +1,4 @@
-Xuimovie.Views.MovieCreate = Backbone.View.extend({
+Xuimovie.Views.MovieCreate = Xui.View.extend({
     template: JST["movieCreate"],
 
     initialize: function() {

@@ -29,7 +29,7 @@ Xuimovie.Views.Movies = Xuimovie.Views.GenericCollectionView.extend({
 	},
 
 	_getCurrentPageNumber: function() {
-		var currentLocation = Backbone.history.location.hash;
+		var currentLocation = Xui.history.location.hash;
 		var currentPage = currentLocation.slice(1);
 
 		if (currentPage === "") {

@@ -7,7 +7,7 @@ window.Xuimovie = {
 
 $(document).ready(function() {
 	mainRouter = new Xuimovie.Routers.Main();
-	Backbone.history.start();
+	Xui.history.start();
 });
 
 function dateFormat(mysql_date) {

@@ -3,6 +3,10 @@
 
 var root = this;
 
+var push = array.push;
+var slice = array.slice;
+var splice = array.splice;
+
 var _ = root._;
 if (!_ && (typeof require !== 'undefined')) _ = require('underscore');
 

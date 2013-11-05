@@ -3,6 +3,7 @@
 
 var root = this;
 
+var array = [];
 var push = array.push;
 var slice = array.slice;
 var splice = array.splice;

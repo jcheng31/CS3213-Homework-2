@@ -333,6 +333,10 @@ _.extend(Xui.Model.prototype, Xui.Events, {
       // We can't. Just return the base URL.
       return urlRoot;
     }
+  },
+
+  _validate: function() {
+    return true;
   }
 });
 

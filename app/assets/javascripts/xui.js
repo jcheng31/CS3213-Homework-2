@@ -694,8 +694,6 @@ _.extend(Collection.prototype, Xui.Events, {
 });
 
 // Underscore methods that we want to implement on the Collection.
-// 90% of the core usefulness of Backbone Collections is actually implemented
-// right here:
 var methods = ['forEach', 'each', 'map', 'collect', 'reduce', 'foldl',
   'inject', 'reduceRight', 'foldr', 'find', 'detect', 'filter', 'select',
   'reject', 'every', 'all', 'some', 'any', 'include', 'contains', 'invoke',

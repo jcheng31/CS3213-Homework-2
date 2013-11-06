@@ -300,7 +300,7 @@ _.extend(Xui.Model.prototype, Xui.Events, {
     var successCallback = options.success;
 
     var triggerDestroyEvent = function() {
-      modelToDestroy.trigger('destroy', model, model.collection, syncOptions);
+      modelToDestroy.trigger('destroy', modelToDestroy, modelToDestroy.collection, syncOptions);
     };
 
     syncOptions.success = function(response) {
@@ -308,9 +308,9 @@ _.extend(Xui.Model.prototype, Xui.Events, {
         triggerDestroyEvent();
       }
       if (successCallback) {
-        successCallback(model, response, syncOptions);
+        successCallback(modelToDestroy, response, syncOptions);
       }
-      model.trigger('sync', model, response, syncOptions);
+      modelToDestroy.trigger('sync', modelToDestroy, response, syncOptions);
     };
 
     var request = this.sync('delete', this, syncOptions);

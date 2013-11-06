@@ -927,8 +927,8 @@ _.extend(History.prototype, Events, {
   },
 
   // Get the cross-browser URL fragment from either URL or hash
-  getFragment: function(fragment, forcePushState) {
-    if (fragment == null) {
+  getFragment: function (fragment, forcePushState) {
+    if (typeof fragment === 'undefined' || fragment === null) {
       if (this._hasPushState || !this._wantsHashChange || forcePushState) {
         fragment = this.location.pathname;
         var root = this.root.replace(trailingSlash, '');

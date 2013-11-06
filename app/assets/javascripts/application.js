@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
-//= require underscore
+//= require underscore-min
 //= require xui
 //= require xuimovie
 //= require jquery.form

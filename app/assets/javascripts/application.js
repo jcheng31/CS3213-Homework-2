@@ -15,7 +15,6 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require underscore
-//= require backbone
 //= require xui
 //= require xuimovie
 //= require jquery.form

@@ -868,9 +868,11 @@ _.extend(Router.prototype, Xui.Events, {
   _bindRoutes: function () {
     if (!this.routes) return;
     this.routes = _.result(this, 'routes');
-    var route, routes = _.keys(this.routes);
-    while ((route = routes.pop()) !== null) {
+    var routes = _.keys(this.routes);
+    var route = routes.pop();
+    while (typeof route !== 'undefined' && route !== null) {
       this.route(route, this.routes[route]);
+      route = routes.pop();
     }
   },
 
@@ -928,7 +930,7 @@ _.extend(History.prototype, Events, {
 
   // Get the cross-browser URL fragment from either URL or hash
   getFragment: function (fragment, forcePushState) {
-    if (fragment === null) {
+    if (typeof fragment === 'undefined' || fragment === null) {
       if (this._hasPushState || !this._wantsHashChange || forcePushState) {
         fragment = this.location.pathname;
         var root = this.root.replace(trailingSlash, '');
@@ -1021,9 +1023,11 @@ _.extend(History.prototype, Events, {
   // Save a fragment into hash history, or replace URL if trigger: true is passed
   navigate: function (fragment, options) {
     if (!History.started) return false;
-    if (!options || options === true) options = {
-      trigger: !! options
-    };
+    if (!options || options === true) {
+      options = {
+        trigger: !! options
+      };
+    }
 
     // If trigger : true, the route callback will fired
     // If replace : true, replace URL without adding into history

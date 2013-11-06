@@ -839,7 +839,6 @@ _.extend(Router.prototype, Xui.Events, {
 
   initialize: function () {},
 
-  // this.route('search/:query/p:num', 'search', function(query, num) {
   route: function (route, name, callback) {
     if (!_.isRegExp(route)) route = this._routeToRegExp(route);
     if (_.isFunction(name)) {

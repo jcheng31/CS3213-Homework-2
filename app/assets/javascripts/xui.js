@@ -1,4 +1,4 @@
-// Similar to Xui Events, this is intended
+// Similar to Backbone Events, this is intended
 // to be added to any object via _.extend().
 
 var root = this;

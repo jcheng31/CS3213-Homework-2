@@ -6,6 +6,9 @@ Xuimovie.Views.MovieCreate = Xui.View.extend({
 
     render: function() {
         this.$el.html(this.template());
+        $('#new-movie-form').ajaxForm({
+            beforeSubmit: this.validateForm
+        });
         this.delegateEvents();
         return this;
     },
@@ -13,6 +16,16 @@ Xuimovie.Views.MovieCreate = Xui.View.extend({
     events:{
         "click #submit": "createMovie",
         "click #btn-cancel": "cancelCreate"
+    },
+
+    validateForm: function() {
+        var movieName = $('#movie-name').val();
+        var movieDescription = $('#movie-summary').val();
+
+        var isMovieNameEmpty = movieName.trim() === "";
+        var isMovieDescriptionEmpty = movieDescription.trim() === "";
+
+        return !isMovieNameEmpty && !isMovieDescriptionEmpty;
     },
 
     createMovie: function(e) {

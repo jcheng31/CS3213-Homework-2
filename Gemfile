@@ -50,7 +50,7 @@ end
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-
+gem 'ejs'
 gem 'oauth2'
 gem 'gon'
 ruby '2.0.0'

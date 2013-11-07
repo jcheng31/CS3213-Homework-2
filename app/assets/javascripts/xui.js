@@ -1122,3 +1122,7 @@ var wrapError = function (model, options) {
     model.trigger('error', model, resp, options);
   };
 };
+
+var isNullOrUndefined = function (x) {
+  return typeof x === 'undefined' || x === null;
+};

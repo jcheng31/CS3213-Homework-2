@@ -461,7 +461,9 @@ _.extend(Collection.prototype, Xui.Events, {
         // `id` and by `cid`.
         model.on('all', this._onModelEvent, this);
         this._byId[model.cid] = model;
-        if (model.id != null) this._byId[model.id] = model;
+        if (!isNullOrUndefined(model.id)) {
+          this._byId[model.id] = model;
+        }
       }
     }
 
@@ -477,7 +479,7 @@ _.extend(Collection.prototype, Xui.Events, {
     if (toAdd.length) {
       if (sortable) sort = true;
       this.length += toAdd.length;
-      if (at != null) {
+      if (!isNullOrUndefined(at)) {
         splice.apply(this.models, [at, 0].concat(toAdd));
       } else {
         push.apply(this.models, toAdd);
@@ -557,8 +559,8 @@ _.extend(Collection.prototype, Xui.Events, {
 
   // Get a model from the set by id.
   get: function (obj) {
-    if (obj == null) return void 0;
-    return this._byId[obj.id != null ? obj.id : obj.cid || obj];
+    if (isNullOrUndefined(obj)) return void 0;
+    return this._byId[!isNullOrUndefined(obj.id) ? obj.id : obj.cid || obj];
   },
 
   // Get the model at the given index.
@@ -686,7 +688,9 @@ _.extend(Collection.prototype, Xui.Events, {
     if (event === 'destroy') this.remove(model, options);
     if (model && event === 'change:' + model.idAttribute) {
       delete this._byId[model.previous(model.idAttribute)];
-      if (model.id != null) this._byId[model.id] = model;
+      if (!isNullOrUndefined(model.id)) {
+        this._byId[model.id] = model;
+      }
     }
     this.trigger.apply(this, arguments);
   }
@@ -868,8 +872,8 @@ _.extend(Router.prototype, Xui.Events, {
   _bindRoutes: function () {
     if (!this.routes) return;
     this.routes = _.result(this, 'routes');
-    var route, routes = _.keys(this.routes);
-    while ((route = routes.pop()) != null) {
+    var routes = _.keys(this.routes);
+    while (!isNullOrUndefined(route = routes.pop())) {
       this.route(route, this.routes[route]);
     }
   },

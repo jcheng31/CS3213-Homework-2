@@ -446,7 +446,8 @@ _.extend(Collection.prototype, Xui.Events, {
 
       // If a duplicate is found, prevent it from being added and
       // optionally merge it into the existing model.
-      if (existing = this.get(model)) {
+      existing = this.get(model);
+      if (existing) {
         if (options.remove) modelMap[existing.cid] = true;
         if (options.merge) {
           existing.set(model.attributes, options);
@@ -507,7 +508,9 @@ _.extend(Collection.prototype, Xui.Events, {
   // any granular `add` or `remove` events. Fires `reset` when finished.
   // Useful for bulk operations and optimizations.
   reset: function (models, options) {
-    options || (options = {});
+    if (!options) {
+      options = {};
+    }
     for (var i = 0, l = this.models.length; i < l; i++) {
       this._removeReference(this.models[i]);
     }
@@ -579,7 +582,9 @@ _.extend(Collection.prototype, Xui.Events, {
   // is added.
   sort: function (options) {
     if (!this.comparator) throw new Error('Cannot sort a set without a comparator');
-    options || (options = {});
+    if (!options) {
+      options = {};
+    }
 
     // Run sort based on type of `comparator`.
     if (_.isString(this.comparator) || this.comparator.length === 1) {
@@ -595,7 +600,9 @@ _.extend(Collection.prototype, Xui.Events, {
   // Figure out the smallest index at which a model should be inserted so as
   // to maintain order.
   sortedIndex: function (model, value, context) {
-    value || (value = this.comparator);
+    if (!value) {
+      value = this.comparator;
+    }
     var iterator = _.isFunction(value) ? value : function (model) {
         return model.get(value);
       };
@@ -663,7 +670,9 @@ _.extend(Collection.prototype, Xui.Events, {
       if (!attrs.collection) attrs.collection = this;
       return attrs;
     }
-    options || (options = {});
+    if (!options) {
+      options = {};
+    }
     options.collection = this;
     var model = new this.model(attrs, options);
     if (!model._validate(attrs, options)) {
@@ -828,7 +837,9 @@ Xui.sync = function (method, model, options) {
 
 // Xui.Router
 var Router = Xui.Router = function (options) {
-  options || (options = {});
+  if (!options) {
+    options = {};
+  }
   if (options.routes) this.routes = options.routes;
   this._bindRoutes();
   this.initialize.apply(this, arguments);
@@ -855,7 +866,9 @@ _.extend(Router.prototype, Xui.Events, {
     var router = this;
     Xui.history.route(route, function (fragment) {
       var args = router._extractParameters(route, fragment);
-      callback && callback.apply(router, args);
+      if (callback) {
+        callback.apply(router, args);
+      }
       router.trigger.apply(router, ['route:' + name].concat(args));
       router.trigger('route', name, args);
       Xui.history.trigger('route', router, name, args);

@@ -78,23 +78,19 @@ var Events = Xui.Events = {
     var callbackArgs = Array.prototype.slice.call(arguments, 1);
 
     var eventCallbacks = this._eventsMap[name];
-    if (eventCallbacks && eventCallbacks.length) {
-      _.each(eventCallbacks, function (callbackObject) {
-        var context = callbackObject.context;
-        callbackObject.callback.apply(context, callbackArgs);
-      });
-    }
+    _.each(eventCallbacks, function (callbackObject) {
+      var context = callbackObject.context;
+      callbackObject.callback.apply(context, callbackArgs);
+    });
 
     // Check if anything's listening for "all" events.
     var allCallbacks = this._eventsMap['all'];
-    if (allCallbacks && allCallbacks.length) {
-      _.each(allCallbacks, function (callbackObject) {
-        var context = callbackObject.context;
-        // Note that we pass all arguments here, so the callback
-        // knows what the actual event that was triggered was.
-        callbackObject.callback.apply(context, arguments);
-      });
-    }
+    _.each(allCallbacks, function (callbackObject) {
+      var context = callbackObject.context;
+      // Note that we pass all arguments here, so the callback
+      // knows what the actual event that was triggered was.
+      callbackObject.callback.apply(context, arguments);
+    });
 
     return this;
   },

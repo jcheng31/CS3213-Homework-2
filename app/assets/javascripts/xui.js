@@ -18,7 +18,7 @@ Xui.$ = root.jQuery || root.Zepto || root.ender || root.$;
 var Events = Xui.Events = {
   // A context can be optionally specified.
   on: function (name, callback, context) {
-    if (!callback) {
+    if (!eventProcessor(this, 'on', name, [callback, context]) || !callback) {
       return this;
     }
 
@@ -48,7 +48,7 @@ var Events = Xui.Events = {
     }
     // At this point, we have an event name to be removed.
 
-    if (!this._eventsMap || !this._eventsMap[name]) {
+    if (!this._eventsMap || !this._eventsMap[name] || !eventProcessor(this, 'off', name, [callback, context])) {
       // We don't need to do anything, since
       // no events have been bound to this name.
       return this;
@@ -69,14 +69,20 @@ var Events = Xui.Events = {
   },
 
   trigger: function (name) {
-    // Do nothing if we have no name or bound events.
-    if (!name || !this._eventsMap) {
+    // Do nothing if we have no bound events.
+    if (!this._eventsMap) {
       return this;
     }
 
     // Get the arguments to be passed to the callbacks.
     var callbackArgs = Array.prototype.slice.call(arguments, 1);
 
+    // Handle multi-event triggers.
+    if (!eventProcessor(this, 'trigger', name, callbackArgs)) {
+      return this;
+    }
+
+    // This is a single, lone event. Handle it.
     var eventCallbacks = this._eventsMap[name];
     _.each(eventCallbacks, function (callbackObject) {
       var context = callbackObject.context;
@@ -85,11 +91,12 @@ var Events = Xui.Events = {
 
     // Check if anything's listening for "all" events.
     var allCallbacks = this._eventsMap['all'];
+    var originalArguments = arguments;
     _.each(allCallbacks, function (callbackObject) {
       var context = callbackObject.context;
       // Note that we pass all arguments here, so the callback
       // knows what the actual event that was triggered was.
-      callbackObject.callback.apply(context, arguments);
+      callbackObject.callback.apply(context, originalArguments);
     });
 
     return this;
@@ -106,7 +113,7 @@ var Events = Xui.Events = {
         callback: callback
       });
 
-      target.on(name, callback);
+      target.on(name, callback, this);
     } else {
       console.log("listenTo: object doesn't support events!");
     }
@@ -139,6 +146,27 @@ var Events = Xui.Events = {
     return this;
   }
 
+};
+
+var eventProcessor = function(target, callback, eventName, remaining) {
+  if (typeof eventName === 'object') {
+    for (var key in eventName) {
+      var concatenatedArguments = [key, eventName[key]].concat(remaining);
+      target[callback].apply(target, concatenatedArguments);
+    }
+    return false;
+  }
+
+  var spaceSplitter = /\s+/;
+  if (spaceSplitter.test(eventName)) {
+    var eventNames = eventName.split(spaceSplitter);
+    for (var i = 0; i < eventNames.length; i++) {
+      target[callback].apply(target, [eventNames[i]].concat(remaining));
+    }
+    return false;
+  }
+
+  return true;
 };
 
 var Model = Xui.Model = function (attributes, options) {

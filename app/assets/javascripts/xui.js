@@ -124,15 +124,21 @@ var Events = Xui.Events = {
       return this;
     }
 
-    var targetEvents = _.filter(this._listeningTo, function (callbackMap) {
-      return callbackMap.target == target && callbackMap.name === name;
-    });
-    if (targetEvents.length) {
-      _.each(targetEvents, function (callbackMap) {
-        var callback = callbackMap.callback;
-        target.off(name, callback);
+    var targetEvents;
+    if (!name) {
+      targetEvents = _.filter(this._listeningTo, function (callbackMap) {
+        return callbackMap.target === target;
+      });
+    } else {
+      targetEvents = _.filter(this._listeningTo, function (callbackMap) {
+        return callbackMap.target === target && callbackMap.name === name;
       });
     }
+
+    _.each(targetEvents, function (callbackMap) {
+      var callback = callbackMap.callback;
+      target.off(name, callback);
+    });
 
     return this;
   }

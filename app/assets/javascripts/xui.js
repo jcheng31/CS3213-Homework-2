@@ -379,8 +379,7 @@ _.extend(Xui.Model.prototype, Xui.Events, {
   }
 });
 
-var Collection;
-Collection = Xui.Collection = function (models, options) {
+var Collection = Xui.Collection = function (models, options) {
   options = options || {};
   if (options.url) this.url = options.url;
   if (options.model) this.model = options.model;

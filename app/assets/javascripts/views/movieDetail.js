@@ -21,7 +21,7 @@ Xuimovie.Views.MovieDetail = Xui.View.extend({
     editMovie: function(e) {
         e.preventDefault();
         var movieId = this.model.get('id');
-        var navigateUrl = '/movies/{0}/#edit'.format(movieId);
+        var navigateUrl = '/movies/{0}/edit'.format(movieId);
         mainRouter.navigate(navigateUrl , { trigger: true });
     },
     destroyMovie: function(e) {

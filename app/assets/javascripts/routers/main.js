@@ -3,15 +3,15 @@ Xuimovie.Routers.Main = Xui.Router.extend({
         ""                  : "mainPage",
         "#loggedout"        : "redirectToMain",
         "movies/:id"        : "getMovie",
-        "movies/:id/#edit"  : "editMovie",
+        "movies/:id/edit"   : "editMovie",
         "new_movie"         : "createMovie",
         ":moviePage"        : "mainPage"
     },
     editMovie: function(movieId) {
         // TODO: if have time, cleaner to use event based method i.e. router just
         // TODO: publish event and let model handle the update
-
-        var movie = new Xuimovie.Models.Movie({id: movieId});
+        var movie = new Xuimovie.Models.Movie();
+        movie.id = movieId;
         movie.fetch({
             success: function() {
                 var movieEditView = new Xuimovie.Views.MovieEdit({

@@ -10,7 +10,8 @@ Xuimovie.Models.Movie = Xui.Model.extend({
 	initialize: function() {
 
 	},
-    url: function() {
-        return 'http://cs3213.herokuapp.com/movies/{0}.json'.format(this.id);
-    }
+  
+  url: function() {
+    return 'http://cs3213.herokuapp.com/movies/' + this.id + '.json';
+  }
 });

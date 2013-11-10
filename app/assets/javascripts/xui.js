@@ -1,6 +1,3 @@
-// Similar to Backbone Events, this is intended
-// to be added to any object via _.extend().
-
 var root = this;
 
 var array = [];
@@ -15,6 +12,8 @@ Xui = {};
 
 Xui.$ = root.jQuery || root.Zepto || root.ender || root.$;
 
+// Similar to Backbone Events, this is intended
+// to be added to any object via _.extend().
 var Events = Xui.Events = {
     // A context can be optionally specified.
     on: function (name, callback, context) {
@@ -380,10 +379,19 @@ _.extend(Xui.Model.prototype, Xui.Events, {
 });
 
 var Collection = Xui.Collection = function (models, options) {
-    options = options || {};
-    if (options.url) this.url = options.url;
-    if (options.model) this.model = options.model;
-    if (options.comparator !== void 0) this.comparator = options.comparator;
+    if (!options) {
+        options = {};
+    }
+
+    if (options.url) {
+        this.url = options.url;
+    }
+    if (options.model) {
+        this.model = options.model;
+    }
+    if (!isUndefined(options.comparator)) {
+        this.comparator = options.comparator;
+    }
     this._reset();
     this.initialize.apply(this, arguments);
     if (models) this.reset(models, _.extend({
@@ -591,7 +599,9 @@ _.extend(Collection.prototype, Xui.Events, {
 
     // Get a model from the set by id.
     get: function (obj) {
-        if (isNullOrUndefined(obj)) return void 0;
+        if (isNullOrUndefined(obj)) {
+            return void 0;
+        }
         return this._byId[!isNullOrUndefined(obj.id) ? obj.id : obj.cid || obj];
     },
 
@@ -648,7 +658,9 @@ _.extend(Collection.prototype, Xui.Events, {
     // data will be passed through the `reset` method instead of `set`.
     fetch: function (options) {
         options = options ? _.clone(options) : {};
-        if (options.parse === void 0) options.parse = true;
+        if (isUndefined(options.parse)) {
+            options.parse = true;
+        }
         var success = options.success;
         var collection = this;
         options.success = function (resp) {
@@ -856,7 +868,8 @@ _.extend(View.prototype, Events, {
             if (!method) continue;
 
             var match = key.match(delegateEventSplitter);
-            var eventName = match[1], selector = match[2];
+            var eventName = match[1],
+                selector = match[2];
             method = _.bind(method, this);
             eventName += '.delegateEvents' + this.cid;
             if (selector === '') {
@@ -908,8 +921,6 @@ _.extend(View.prototype, Events, {
     }
 
 });
-
-
 
 
 
@@ -1217,8 +1228,6 @@ _.extend(History.prototype, Events, {
 
 Xui.history = new History;
 
-
-
 Xui._extend = function (instanceProperties, staticProperties) {
     var parent = this;
 
@@ -1274,3 +1283,77 @@ var wrapError = function (model, options) {
 var isNullOrUndefined = function (x) {
     return typeof x === 'undefined' || x === null;
 };
+var isUndefined = function (x) {
+    return typeof x === 'undefined';
+};
+
+/*
+    A view designed to map to a collection of items.
+
+    Requirements:
+        Options hash consisting of: {
+            template: A JST template that contains an element with ID 'subview-container'
+            subView: A View constructor to use to render each model in the collection
+        }
+
+*/
+Xui.CollectionView = Xui.View.extend({
+    initialize: function () {
+        this.listenTo(this.collection, 'add', this.collectionAddHandler);
+        this.listenTo(this.collection, 'change', this.collectionChangeHandler);
+        this.listenTo(this.collection, 'remove', this.collectionRemoveHandler);
+
+        this.childViews = [];
+        this.render();
+    },
+
+    render: function () {
+        var selfRendered = this.template({});
+        this.$el.html(selfRendered);
+        this.renderSubviews();
+        return this;
+    },
+
+    collectionAddHandler: function (addedItem) {
+        var newView = this.createViewForItem(addedItem);
+        this.childViews.push(newView);
+        this.renderSubviews();
+    },
+
+    collectionRemoveHandler: function (removedItem) {
+        this.removeModelFromChildViews(removedItem);
+        this.renderSubviews();
+    },
+
+    collectionChangeHandler: function (changedItem) {
+        this.childViews = [];
+        var that = this;
+        this.collection.each(function (model) {
+            that.childViews.push(that.createViewForItem(model));
+        });
+        this.renderSubviews();
+    },
+
+    createViewForItem: function (item) {
+        var newView = new this.subView({
+            model: item
+        });
+        return newView;
+    },
+
+    removeModelFromChildViews: function (model) {
+        this.childViews = this.childViews.filter(function (view) {
+            return view.model != model;
+        });
+    },
+
+    renderSubviews: function () {
+        var fragment = document.createDocumentFragment();
+
+        _(this.childViews).each(function (curr) {
+            fragment.appendChild(curr.render().el);
+        });
+
+        this.$('#subview-container').html(fragment);
+    }
+});

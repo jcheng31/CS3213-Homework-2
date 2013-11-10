@@ -782,8 +782,7 @@ _.each(attributeMethods, function (method) {
 
 // Xui.View
 // -------------
-// A module that represents an element in the DOM and manages its behaviour
-
+// A module that represents an element in the DOM and manages its behaviour.
 // Creating a Xui.View creates its initial element outside of the DOM,
 // if an existing element is not provided...
 var View = Xui.View = function(options) {
@@ -797,10 +796,10 @@ var View = Xui.View = function(options) {
     this.delegateEvents();
 };
 
-// Cached regex to split keys for `delegate`.
+// Regex to split keys for `delegate`.
 var delegateEventSplitter = /^(\S+)\s*(.*)$/;
 
-// List of view options to be merged as properties.
+// Built-in view properties
 var viewOptions = ['model', 'collection', 'el', 'id', 'attributes', 'className', 'tagName', 'events'];
 
 // Set up all inheritable **Xui.View** properties and methods.
@@ -830,8 +829,7 @@ _.extend(View.prototype, Events, {
         return this;
     },
 
-    // Change the view's element (`this.el` property), including event
-    // re-delegation.
+    // Set View's el and delegate events attached to it
     setElement: function(element, delegate) {
         if (this.$el) this.undelegateEvents();
         this.$el = element instanceof Xui.$ ? element : Xui.$(element);
@@ -925,7 +923,6 @@ _.extend(View.prototype, Events, {
         this.model = null;
         delete this;
     }
-
 });
 
 

@@ -1187,6 +1187,7 @@ _.extend(History.prototype, Events, {
             trigger: !! options
         };
 
+
         // If trigger : true, the route callback will fired
         // If replace : true, replace URL without adding into history
         fragment = this.getFragment(fragment || '');
@@ -1205,6 +1206,7 @@ _.extend(History.prototype, Events, {
             if (options.replace) {
                 this.history.replaceState({}, document.title, url);
             } else {
+                if (url === '') url = '/';
                 this.history.pushState({}, document.title, url);
             }
         } else if (this._wantsHashChange) {

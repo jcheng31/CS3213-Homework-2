@@ -879,11 +879,6 @@ _.extend(View.prototype, Events, {
     // Perform initial configuration for View.
     // Only the options properties that matches the viewOptions become
     // the properties of View.
-
-    // Ensure that the View has a DOM element to render into.
-    // If `this.el` is a string, pass it through `$()`, take the first
-    // matching element, and re-assign it to `el`. Otherwise, create
-    // an element from the `id`, `className` and `tagName` properties.
     _configure: function(options) {
         // that reference this View instance
         var that = this;

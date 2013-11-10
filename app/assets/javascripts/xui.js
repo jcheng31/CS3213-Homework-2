@@ -791,9 +791,9 @@ var View = Xui.View = function(options) {
     // Useful if we don't have an actual id because the model is not yet persisted on the server
     // or we are saving the model with localStorage
     this.cid = _.uniqueId('view');
-    this._configure(options || {}); // ok
+    this._configure(options || {});
     this._ensureElement();
-    this.initialize.apply(this, arguments); // ok
+    this.initialize.apply(this, arguments);
     this.delegateEvents();
 };
 
@@ -806,22 +806,18 @@ var viewOptions = ['model', 'collection', 'el', 'id', 'attributes', 'className',
 // Set up all inheritable **Xui.View** properties and methods.
 _.extend(View.prototype, Events, {
 
-    // The default `tagName` of a View's element is `"div"`.
+    // default tagName
     tagName: 'div',
 
-    // jQuery delegate for element lookup, scoped to DOM elements within the
-    // current view. This should be prefered to global lookups where possible.
+    // Element lookup function, delegating it to jQuery
     $: function(selector) {
         return this.$el.find(selector);
     },
 
-    // Initialize is an empty function by default. Override it with your own
-    // initialization logic.
+    // Initialize function to be overriden by users
     initialize: function(){},
 
-    // **render** is the core function that your view should override, in order
-    // to populate its element (`this.el`), with the appropriate HTML. The
-    // convention is for **render** to always return `this`.
+    // Method to be overriden to populate the el with html output
     render: function() {
         return this;
     },
@@ -849,12 +845,12 @@ _.extend(View.prototype, Events, {
     // Event handlers will be bound to the view, with `this` set properly.
     // Omitting the selector binds the event to `this.el`.
     delegateEvents: function(events) {
-
         // Check if we have events to delegate.
         // Events can be new events or events previously attached to View
         if (!(events = this.events)) {
             return this;
         }
+        // Remove previously delgated events
         this.undelegateEvents();
 
         for (var key in events) {
@@ -906,22 +902,24 @@ _.extend(View.prototype, Events, {
         });
     },
 
-    // Ensure that the View has a DOM element to render into.
-    // If `this.el` is a string, pass it through `$()`, take the first
-    // matching element, and re-assign it to `el`. Otherwise, create
-    // an element from the `id`, `className` and `tagName` properties.
+    // Make sure that el attached to View is valid.
+    // If el is passed as a string,
+    // automatically find the correct DOM element if el passed as string.
+    // Else use tagName, id and className to construct DOM element for el
     _ensureElement: function() {
         if (!this.el) {
-            var attrs = _.extend({}, _.result(this, 'attributes'));
-            if (this.id) attrs.id = _.result(this, 'id');
-            if (this.className) attrs['class'] = _.result(this, 'className');
+            var attrs = {} || this.attributes;
+            attrs.id = this.id;
+            attrs.class = this.className;
             var $el = Xui.$('<' + _.result(this, 'tagName') + '>').attr(attrs);
             this.setElement($el, false);
         } else {
+            // View already has el property
             this.setElement(_.result(this, 'el'), false);
         }
     },
 
+    // Destroy view to conserve memory
     destroy: function() {
         this.undelegateEvents();
         this.model = null;

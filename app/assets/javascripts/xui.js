@@ -1286,7 +1286,7 @@ var isNullOrUndefined = function (x) {
 
 var isUndefined = function (x) {
     return typeof x === 'undefined';
-}
+};
 
 /*
     A view designed to map to a collection of items.

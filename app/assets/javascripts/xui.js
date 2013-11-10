@@ -779,9 +779,9 @@ var View = Xui.View = function(options) {
     // Useful if we don't have an actual id because the model is not yet persisted on the server
     // or we are saving the model with localStorage
     this.cid = _.uniqueId('view');
-    this._configure(options || {});
+    this._configure(options || {}); // ok
     this._ensureElement();
-    this.initialize.apply(this, arguments);
+    this.initialize.apply(this, arguments); // ok
     this.delegateEvents();
 };
 
@@ -890,6 +890,11 @@ _.extend(View.prototype, Events, {
             }
         });
     },
+
+    // Ensure that the View has a DOM element to render into.
+    // If `this.el` is a string, pass it through `$()`, take the first
+    // matching element, and re-assign it to `el`. Otherwise, create
+    // an element from the `id`, `className` and `tagName` properties.
     _ensureElement: function() {
         if (!this.el) {
             var attrs = _.extend({}, _.result(this, 'attributes'));

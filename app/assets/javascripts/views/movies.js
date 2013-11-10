@@ -1,4 +1,4 @@
-Xuimovie.Views.Movies = Xuimovie.Views.GenericCollectionView.extend({
+Xuimovie.Views.Movies = Xui.CollectionView.extend({
 	template: JST["movies"],
 	subView: Xuimovie.Views.Movie,
 	events: {

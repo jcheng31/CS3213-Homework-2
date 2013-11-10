@@ -17,12 +17,14 @@ Xuimovie.Views.MovieDetail = Xui.View.extend({
     back: function(e) {
         e.preventDefault();
         mainRouter.navigate('/', { trigger: true });
+        this.destroy();
     },
     editMovie: function(e) {
         e.preventDefault();
         var movieId = this.model.get('id');
         var navigateUrl = '/movies/{0}/edit'.format(movieId);
         mainRouter.navigate(navigateUrl , { trigger: true });
+        this.destroy();
     },
     destroyMovie: function(e) {
         e.preventDefault();
@@ -46,6 +48,7 @@ Xuimovie.Views.MovieDetail = Xui.View.extend({
             wait: true,
             success: function() {
                 mainRouter.navigate('/', {trigger: true});
+                this.destroy();
             },
             error: function(model, xhr, options) {
                 alert("Sorry we cannot delete this movie: " + xhr);

@@ -920,6 +920,12 @@ _.extend(View.prototype, Events, {
         } else {
             this.setElement(_.result(this, 'el'), false);
         }
+    },
+
+    destroy: function() {
+        this.undelegateEvents();
+        this.model = null;
+        delete this;
     }
 
 });
@@ -1357,5 +1363,13 @@ Xui.CollectionView = Xui.View.extend({
         });
 
         this.$('#subview-container').html(fragment);
+    },
+
+    destroy: function() {
+        _.each(this.childViews, function(child) {
+            child.destroy();
+        });
+        this.undelegateEvents();
+        delete this;
     }
 });

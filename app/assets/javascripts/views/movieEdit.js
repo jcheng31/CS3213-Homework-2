@@ -63,11 +63,13 @@ Xuimovie.Views.MovieEdit = Xui.View.extend({
       }
     });
     var xhr = form.data('jqxhr');
+    var that = this;
     xhr.done(function () {
       var navigateUrl = '/movies/{0}'.format(movieId);
       mainRouter.navigate(navigateUrl, {
         trigger: true
       });
+      that.destroy();
     });
 
 
@@ -80,5 +82,6 @@ Xuimovie.Views.MovieEdit = Xui.View.extend({
     mainRouter.navigate(navigateUrl, {
       trigger: true
     });
+    this.destroy();
   }
 });

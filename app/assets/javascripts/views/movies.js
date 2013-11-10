@@ -46,6 +46,7 @@ Xuimovie.Views.Movies = Xui.CollectionView.extend({
 		mainRouter.navigate("/" + page, {
 			trigger: true
 		});
+		this.destroy();
 	},
 
 	toNewMoviePage: function(e) {

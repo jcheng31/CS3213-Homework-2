@@ -18,5 +18,6 @@ Xuimovie.Views.Movie = Xui.View.extend({
 		mainRouter.navigate("movies/" + this.model.attributes.id, {
 			trigger: true
 		});
+		this.destroy();
 	}
 });

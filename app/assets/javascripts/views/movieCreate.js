@@ -50,6 +50,7 @@ Xuimovie.Views.MovieCreate = Xui.View.extend({
         mainRouter.navigate('/', {
             trigger: true
         });
+        this.destroy();
         return false;
     },
 
@@ -58,5 +59,6 @@ Xuimovie.Views.MovieCreate = Xui.View.extend({
         mainRouter.navigate('/', {
             trigger: true
         });
+        this.destroy();
     }
 });

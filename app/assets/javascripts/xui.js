@@ -844,33 +844,37 @@ _.extend(View.prototype, Events, {
         return this;
     },
 
-    // Set callbacks, where `this.events` is a hash of
-    //
-    // *{"event selector": "callback"}*
-    //
-    //     {
-    //       'mousedown .title':  'edit',
-    //       'click .button':     'save'
-    //       'click .open':       function(e) { ... }
-    //     }
-    //
-    // pairs. Callbacks will be bound to the view, with `this` set properly.
-    // Uses event delegation for efficiency.
+    // Set event handlers, where `this.events` is a hash of
+    // "event selector" : "handler"
+    // Event handlers will be bound to the view, with `this` set properly.
     // Omitting the selector binds the event to `this.el`.
-    // This only works for delegate-able events: not `focus`, `blur`, and
-    // not `change`, `submit`, and `reset` in Internet Explorer.
     delegateEvents: function(events) {
-        if (!(events || (events = _.result(this, 'events')))) return this;
+
+        // Check if we have events to delegate.
+        // Events can be new events or events previously attached to View
+        if (!(events = this.events)) {
+            return this;
+        }
         this.undelegateEvents();
+
         for (var key in events) {
             var method = events[key];
-            if (!_.isFunction(method)) method = this[events[key]];
-            if (!method) continue;
+            // Check if we have to look deeper for event handlers
+            if (typeof method !== 'function') {
+                method = this[events[key]];
+            }
+            if (!method) {
+                // No event handler for this event
+                continue;
+            }
 
             var match = key.match(delegateEventSplitter);
             var eventName = match[1],
                 selector = match[2];
-            method = _.bind(method, this);
+            // Change context of method so that when it is called later
+            // this is properly set
+            method = method.bind(this);
+
             eventName += '.delegateEvents' + this.cid;
             if (selector === '') {
                 this.$el.on(eventName, method);
@@ -881,9 +885,7 @@ _.extend(View.prototype, Events, {
         return this;
     },
 
-    // Clears all callbacks previously bound to the view with `delegateEvents`.
-    // You usually don't need to use this, but may wish to if you have multiple
-    // Xui views attached to the same DOM element.
+    // Removes all event handlers to view for events created using delegateEvents
     undelegateEvents: function() {
         this.$el.off('.delegateEvents' + this.cid);
         return this;
@@ -1288,15 +1290,15 @@ var isUndefined = function (x) {
 };
 
 /*
-    A view designed to map to a collection of items.
+ A view designed to map to a collection of items.
 
-    Requirements:
-        Options hash consisting of: {
-            template: A JST template that contains an element with ID 'subview-container'
-            subView: A View constructor to use to render each model in the collection
-        }
+ Requirements:
+ Options hash consisting of: {
+ template: A JST template that contains an element with ID 'subview-container'
+ subView: A View constructor to use to render each model in the collection
+ }
 
-*/
+ */
 Xui.CollectionView = Xui.View.extend({
     initialize: function () {
         this.listenTo(this.collection, 'add', this.collectionAddHandler);

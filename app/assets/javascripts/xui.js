@@ -147,7 +147,7 @@ var Events = Xui.Events = {
 
 };
 
-var eventProcessor = function(target, callback, eventName, remaining) {
+var eventProcessor = function (target, callback, eventName, remaining) {
     if (typeof eventName === 'object') {
         for (var key in eventName) {
             var concatenatedArguments = [key, eventName[key]].concat(remaining);
@@ -379,10 +379,19 @@ _.extend(Xui.Model.prototype, Xui.Events, {
 });
 
 var Collection = Xui.Collection = function (models, options) {
-    options = options || {};
-    if (options.url) this.url = options.url;
-    if (options.model) this.model = options.model;
-    if (options.comparator !== void 0) this.comparator = options.comparator;
+    if (!options) {
+        options = {};
+    }
+
+    if (options.url) {
+        this.url = options.url;
+    }
+    if (options.model) {
+        this.model = options.model;
+    }
+    if (!isUndefined(options.comparator)) {
+        this.comparator = options.comparator;
+    }
     this._reset();
     this.initialize.apply(this, arguments);
     if (models) this.reset(models, _.extend({
@@ -590,7 +599,9 @@ _.extend(Collection.prototype, Xui.Events, {
 
     // Get a model from the set by id.
     get: function (obj) {
-        if (isNullOrUndefined(obj)) return void 0;
+        if (isNullOrUndefined(obj)) {
+            return void 0;
+        }
         return this._byId[!isNullOrUndefined(obj.id) ? obj.id : obj.cid || obj];
     },
 
@@ -632,8 +643,8 @@ _.extend(Collection.prototype, Xui.Events, {
             value = this.comparator;
         }
         var iterator = _.isFunction(value) ? value : function (model) {
-            return model.get(value);
-        };
+                return model.get(value);
+            };
         return _.sortedIndex(this.models, model, iterator, context);
     },
 
@@ -647,7 +658,9 @@ _.extend(Collection.prototype, Xui.Events, {
     // data will be passed through the `reset` method instead of `set`.
     fetch: function (options) {
         options = options ? _.clone(options) : {};
-        if (options.parse === void 0) options.parse = true;
+        if (isUndefined(options.parse)) {
+            options.parse = true;
+        }
         var success = options.success;
         var collection = this;
         options.success = function (resp) {
@@ -759,8 +772,8 @@ var attributeMethods = ['groupBy', 'countBy', 'sortBy'];
 _.each(attributeMethods, function (method) {
     Collection.prototype[method] = function (value, context) {
         var iterator = _.isFunction(value) ? value : function (model) {
-            return model.get(value);
-        };
+                return model.get(value);
+            };
         return _[method](this.models, iterator, context);
     };
 });
@@ -773,7 +786,7 @@ _.each(attributeMethods, function (method) {
 
 // Creating a Xui.View creates its initial element outside of the DOM,
 // if an existing element is not provided...
-var View = Xui.View = function(options) {
+var View = Xui.View = function (options) {
     // Assign a unique client id to each view.
     // Useful if we don't have an actual id because the model is not yet persisted on the server
     // or we are saving the model with localStorage
@@ -798,24 +811,24 @@ _.extend(View.prototype, Events, {
 
     // jQuery delegate for element lookup, scoped to DOM elements within the
     // current view. This should be prefered to global lookups where possible.
-    $: function(selector) {
+    $: function (selector) {
         return this.$el.find(selector);
     },
 
     // Initialize is an empty function by default. Override it with your own
     // initialization logic.
-    initialize: function(){},
+    initialize: function () {},
 
     // **render** is the core function that your view should override, in order
     // to populate its element (`this.el`), with the appropriate HTML. The
     // convention is for **render** to always return `this`.
-    render: function() {
+    render: function () {
         return this;
     },
 
     // Remove this view by taking the element out of the DOM, and removing any
     // applicable Xui.Events listeners.
-    remove: function() {
+    remove: function () {
         this.$el.remove();
         this.stopListening();
         return this;
@@ -823,7 +836,7 @@ _.extend(View.prototype, Events, {
 
     // Change the view's element (`this.el` property), including event
     // re-delegation.
-    setElement: function(element, delegate) {
+    setElement: function (element, delegate) {
         if (this.$el) this.undelegateEvents();
         this.$el = element instanceof Xui.$ ? element : Xui.$(element);
         this.el = this.$el[0];
@@ -846,7 +859,7 @@ _.extend(View.prototype, Events, {
     // Omitting the selector binds the event to `this.el`.
     // This only works for delegate-able events: not `focus`, `blur`, and
     // not `change`, `submit`, and `reset` in Internet Explorer.
-    delegateEvents: function(events) {
+    delegateEvents: function (events) {
         if (!(events || (events = _.result(this, 'events')))) return this;
         this.undelegateEvents();
         for (var key in events) {
@@ -855,7 +868,8 @@ _.extend(View.prototype, Events, {
             if (!method) continue;
 
             var match = key.match(delegateEventSplitter);
-            var eventName = match[1], selector = match[2];
+            var eventName = match[1],
+                selector = match[2];
             method = _.bind(method, this);
             eventName += '.delegateEvents' + this.cid;
             if (selector === '') {
@@ -870,7 +884,7 @@ _.extend(View.prototype, Events, {
     // Clears all callbacks previously bound to the view with `delegateEvents`.
     // You usually don't need to use this, but may wish to if you have multiple
     // Xui views attached to the same DOM element.
-    undelegateEvents: function() {
+    undelegateEvents: function () {
         this.$el.off('.delegateEvents' + this.cid);
         return this;
     },
@@ -883,10 +897,10 @@ _.extend(View.prototype, Events, {
     // If `this.el` is a string, pass it through `$()`, take the first
     // matching element, and re-assign it to `el`. Otherwise, create
     // an element from the `id`, `className` and `tagName` properties.
-    _configure: function(options) {
+    _configure: function (options) {
         // that reference this View instance
         var that = this;
-        $.each(options, function(key, value) {
+        $.each(options, function (key, value) {
             // Check if key matches any in viewOptions
             if ($.inArray(key, viewOptions) >= 0) {
                 // Add the property to View
@@ -894,7 +908,7 @@ _.extend(View.prototype, Events, {
             }
         });
     },
-    _ensureElement: function() {
+    _ensureElement: function () {
         if (!this.el) {
             var attrs = _.extend({}, _.result(this, 'attributes'));
             if (this.id) attrs.id = _.result(this, 'id');
@@ -907,8 +921,6 @@ _.extend(View.prototype, Events, {
     }
 
 });
-
-
 
 
 
@@ -1272,6 +1284,9 @@ var isNullOrUndefined = function (x) {
     return typeof x === 'undefined' || x === null;
 };
 
+var isUndefined = function (x) {
+    return typeof x === 'undefined';
+}
 
 /*
     A view designed to map to a collection of items.
@@ -1284,7 +1299,7 @@ var isNullOrUndefined = function (x) {
 
 */
 Xui.CollectionView = Xui.View.extend({
-    initialize: function() {
+    initialize: function () {
         this.listenTo(this.collection, 'add', this.collectionAddHandler);
         this.listenTo(this.collection, 'change', this.collectionChangeHandler);
         this.listenTo(this.collection, 'remove', this.collectionRemoveHandler);
@@ -1293,50 +1308,50 @@ Xui.CollectionView = Xui.View.extend({
         this.render();
     },
 
-    render: function() {
+    render: function () {
         var selfRendered = this.template({});
         this.$el.html(selfRendered);
         this.renderSubviews();
         return this;
     },
 
-    collectionAddHandler: function(addedItem) {
+    collectionAddHandler: function (addedItem) {
         var newView = this.createViewForItem(addedItem);
         this.childViews.push(newView);
         this.renderSubviews();
     },
 
-    collectionRemoveHandler: function(removedItem) {
+    collectionRemoveHandler: function (removedItem) {
         this.removeModelFromChildViews(removedItem);
         this.renderSubviews();
     },
 
-    collectionChangeHandler: function(changedItem) {
+    collectionChangeHandler: function (changedItem) {
         this.childViews = [];
         var that = this;
-        this.collection.each(function(model) {
+        this.collection.each(function (model) {
             that.childViews.push(that.createViewForItem(model));
         });
         this.renderSubviews();
     },
 
-    createViewForItem: function(item) {
+    createViewForItem: function (item) {
         var newView = new this.subView({
             model: item
         });
         return newView;
     },
 
-    removeModelFromChildViews: function(model) {
-        this.childViews = this.childViews.filter(function(view) {
+    removeModelFromChildViews: function (model) {
+        this.childViews = this.childViews.filter(function (view) {
             return view.model != model;
         });
     },
 
-    renderSubviews: function() {
+    renderSubviews: function () {
         var fragment = document.createDocumentFragment();
 
-        _(this.childViews).each(function(curr) {
+        _(this.childViews).each(function (curr) {
             fragment.appendChild(curr.render().el);
         });
 

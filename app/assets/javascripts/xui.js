@@ -766,25 +766,18 @@ _.each(attributeMethods, function (method) {
     };
 });
 
-// DAVID:
-// SORRY WILL TRY TO UPDATE THIS AS SOON AS POSSIBLE
-// CURRENTLY IT IS A COMPLETE DUPLICATE OF BACKBONE VIEW
-// WITH 'Backbone' REPLACED WITH 'Xui'
-//
+
+
 // Xui.View
 // -------------
-
-// Xui Views are almost more convention than they are actual code. A View
-// is simply a JavaScript object that represents a logical chunk of UI in the
-// DOM. This might be a single item, an entire list, a sidebar or panel, or
-// even the surrounding frame which wraps your whole app. Defining a chunk of
-// UI as a **View** allows you to define your DOM events declaratively, without
-// having to worry about render order ... and makes it easy for the view to
-// react to specific changes in the state of your models.
+// A module that represents an element in the DOM and manages its behaviour
 
 // Creating a Xui.View creates its initial element outside of the DOM,
 // if an existing element is not provided...
 var View = Xui.View = function(options) {
+    // Assign a unique client id to each view.
+    // Useful if we don't have an actual id because the model is not yet persisted on the server
+    // or we are saving the model with localStorage
     this.cid = _.uniqueId('view');
     this._configure(options || {});
     this._ensureElement();
@@ -883,20 +876,25 @@ _.extend(View.prototype, Events, {
         return this;
     },
 
-    // Performs the initial configuration of a View with a set of options.
-    // Keys with special meaning *(e.g. model, collection, id, className)* are
-    // attached directly to the view.  See `viewOptions` for an exhaustive
-    // list.
-    _configure: function(options) {
-        if (this.options) options = _.extend({}, _.result(this, 'options'), options);
-        _.extend(this, _.pick(options, viewOptions));
-        this.options = options;
-    },
+    // Perform initial configuration for View.
+    // Only the options properties that matches the viewOptions become
+    // the properties of View.
 
     // Ensure that the View has a DOM element to render into.
     // If `this.el` is a string, pass it through `$()`, take the first
     // matching element, and re-assign it to `el`. Otherwise, create
     // an element from the `id`, `className` and `tagName` properties.
+    _configure: function(options) {
+        // that reference this View instance
+        var that = this;
+        $.each(options, function(key, value) {
+            // Check if key matches any in viewOptions
+            if ($.inArray(key, viewOptions) >= 0) {
+                // Add the property to View
+                that[key] = options[key];
+            }
+        });
+    },
     _ensureElement: function() {
         if (!this.el) {
             var attrs = _.extend({}, _.result(this, 'attributes'));

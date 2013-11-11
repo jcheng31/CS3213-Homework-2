@@ -6,5 +6,12 @@ Xuimovie.Models.Review = Xui.Model.extend({
 		score: 0,
 		updated_at: "",
 		user: {}
-	}
+	}, 
+
+  url: function() {
+    var collectionUrl = _.result(this.collection, 'url');
+    // Remove .json part
+    collectionUrl = collectionUrl.slice(0, -5);
+    return collectionUrl + '/' + this.get('id') +'.json';
+  }
 });

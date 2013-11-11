@@ -15,23 +15,15 @@ Xuimovie.Views.Review = Xui.View.extend({
     },
 
     deleteReview: function(){
-        var url = "//cs3213.herokuapp.com/movies/12/reviews/" + this.model.get('id') +".json";
         var model = this.model;
-        if(typeof gon != 'undefined'){
-            $.ajax(
-                {
-                    type: "DELETE",
-                    data: {"access_token": gon.token },
-                    url: url,
-                    error: function() {
-                        alert("please only delete your own review.");
-                    }
-                }).done(function(){
-                    model.destroy({});
-                });
-        } else{
-            alert("please login first!");
-        }
+        var that = this;
+        model.destroy({
+            success: function() {
+                alert('Review destroyed');
+                that.destroy();
+            },
+            data: { access_token: gon.token }
+        });
     }
 });
 

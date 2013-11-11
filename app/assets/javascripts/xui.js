@@ -1320,9 +1320,15 @@ Xui.CollectionView = Xui.View.extend({
     },
 
     collectionAddHandler: function (addedItem) {
-        var newView = this.createViewForItem(addedItem);
-        this.childViews.push(newView);
-        this.renderSubviews();
+        var existing = _.find(this.childViews, function(childView) {
+            return childView.model.get('id') === addedItem.get('id');
+        });
+
+        if (!existing) {
+            var newView = this.createViewForItem(addedItem);
+            this.childViews.push(newView);
+            this.renderSubviews();
+        }
     },
 
     collectionRemoveHandler: function (removedItem) {

@@ -366,7 +366,7 @@ _.extend(Xui.Model.prototype, Xui.Events, {
             if (shouldPrependSlash) {
                 url = url + '/';
             }
-            return url = url + this.id;
+            return url = url + this.get('id');
         } else {
             // We can't. Just return the base URL.
             return urlRoot;

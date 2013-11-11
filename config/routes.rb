@@ -8,6 +8,7 @@ Xuimovie::Application.routes.draw do
   get 'login' => "sessions#new", :as => "login"
   get 'logout' => "sessions#destroy", :as => "logout"
   get 'redirect' => "sessions#redirect", :as => "redirect"
+  get '*any' => 'welcome#index'
 
   # resources :movies
 

@@ -39,6 +39,7 @@ Xuimovie.Views.MovieDetail = Xui.View.extend({
         }
 
         var movie = this.model;
+        var that = this;
         movie.destroy({
             data: {
                 access_token: gon.token
@@ -48,7 +49,7 @@ Xuimovie.Views.MovieDetail = Xui.View.extend({
             wait: true,
             success: function() {
                 mainRouter.navigate('/', {trigger: true});
-                this.destroy();
+                that.destroy();
             },
             error: function(model, xhr, options) {
                 alert("Sorry we cannot delete this movie: " + xhr);

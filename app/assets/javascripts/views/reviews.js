@@ -13,7 +13,6 @@ Xuimovie.Views.Reviews = Xui.CollectionView.extend({
                 'comment': $('#review_comment').val()
             }
         };
-        console.log(data);
         e.preventDefault();
         var collection = this.collection;
         if (typeof(gon) != 'undefined') {

@@ -362,11 +362,11 @@ _.extend(Xui.Model.prototype, Xui.Events, {
         var url = urlRoot;
         if (this.id !== null) {
             // We can generate a URL for this particular model.
-            var shouldPrependSlash = base.charAt(base.length - 1) !== '/';
+            var shouldPrependSlash = urlRoot.charAt(urlRoot.length - 1) !== '/';
             if (shouldPrependSlash) {
                 url = url + '/';
             }
-            url = url + this.id;
+            return url = url + this.id;
         } else {
             // We can't. Just return the base URL.
             return urlRoot;

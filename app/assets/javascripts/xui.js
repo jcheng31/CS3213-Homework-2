@@ -39,7 +39,7 @@ var Events = Xui.Events = {
         return this;
     },
 
-    off: function (name, callback) {
+    off: function (name, callback, context) {
         // If no name is passed, remove all events.
         if (!name) {
             this._eventsMap = {};
@@ -499,8 +499,8 @@ _.extend(Collection.prototype, Xui.Events, {
                 // `id` and by `cid`.
                 model.on('all', this._onModelEvent, this);
                 this._byId[model.cid] = model;
-                if (!isNullOrUndefined(model.id)) {
-                    this._byId[model.id] = model;
+                if (!isNullOrUndefined(model.id || model.get('id'))) {
+                    this._byId[model.id || model.get('id')] = model;
                 }
             }
         }
@@ -602,7 +602,8 @@ _.extend(Collection.prototype, Xui.Events, {
         if (isNullOrUndefined(obj)) {
             return void 0;
         }
-        return this._byId[!isNullOrUndefined(obj.id) ? obj.id : obj.cid || obj];
+        var id = obj.get('id');
+        return this._byId[!isNullOrUndefined(id) ? id : obj.cid || obj];
     },
 
     // Get the model at the given index.
@@ -1325,6 +1326,7 @@ Xui.CollectionView = Xui.View.extend({
         });
 
         if (!existing) {
+            addedItem.id = addedItem.id || addedItem.get('id');
             var newView = this.createViewForItem(addedItem);
             this.childViews.push(newView);
             this.renderSubviews();

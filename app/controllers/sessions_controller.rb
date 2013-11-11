@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
 
   def redirect_url
     return 'http://localhost:3000/redirect' if Rails.env == "development" 
-    'http://xui-movies.herokuapp.com/redirect'
+    'http://old-xui-movies.herokuapp.com/redirect'
   end
 
 	def client

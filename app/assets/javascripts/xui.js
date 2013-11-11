@@ -1229,7 +1229,7 @@ _.extend(History.prototype, Events, {
         } else {
             location.hash = '#' + fragment;
         }
-    },
+    }
 });
 
 Xui.history = new History;

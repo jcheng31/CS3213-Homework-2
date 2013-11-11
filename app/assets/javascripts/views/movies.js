@@ -29,8 +29,8 @@ Xuimovie.Views.Movies = Xui.CollectionView.extend({
 	},
 
 	_getCurrentPageNumber: function() {
-		var currentLocation = Xui.history.location.hash;
-		var currentPage = currentLocation.slice(1);
+        // if http://localhost:3000/2, pathname is "/2"
+        var currentPage = Xui.history.location.pathname.replace("/","");
 
 		if (currentPage === "") {
 			currentPage = 1;

@@ -7,13 +7,13 @@ window.Xuimovie = {
 
 $(document).ready(function() {
 	mainRouter = new Xuimovie.Routers.Main();
-	Xui.history.start({pushState: true});
+	Xui.history.start();
 });
 
 $(document).on('page:load', function() {
 	Xui.history.stop();
 	mainRouter = new Xuimovie.Routers.Main();
-	Xui.history.start({pushState: true});
+	Xui.history.start();
 });
 
 function dateFormat(mysql_date) {

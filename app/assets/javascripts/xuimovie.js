@@ -10,6 +10,12 @@ $(document).ready(function() {
 	Xui.history.start({pushState: true});
 });
 
+$(document).on('page:load', function() {
+	Xui.history.stop();
+	mainRouter = new Xuimovie.Routers.Main();
+	Xui.history.start({pushState: true});
+});
+
 function dateFormat(mysql_date) {
 	var t = mysql_date.split(/[- T : Z]/);
 	var d = new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5]);
